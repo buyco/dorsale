@@ -31,8 +31,7 @@ describe ::Dorsale::BillingMachine::InvoiceMultipleVatPdf, pdfs: true do
   end
 
   it "should work with empty invoice" do
-    id_card = Dorsale::BillingMachine::IdCard.new
-    invoice = ::Dorsale::BillingMachine::Invoice.new(id_card: id_card)
+    invoice = ::Dorsale::BillingMachine::Invoice.new
 
     expect {
       invoice.to_pdf

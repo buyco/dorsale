@@ -3,7 +3,6 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
 
   belongs_to :customer, polymorphic: true
   belongs_to :payment_term
-  belongs_to :id_card
 
   has_many :lines, inverse_of: :invoice, dependent: :destroy, class_name: ::Dorsale::BillingMachine::InvoiceLine
 
@@ -11,8 +10,7 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
 
   polymorphic_id_for :customer
 
-  validates :id_card, presence: true
-  validates :date,    presence: true
+  validates :date, presence: true
 
   default_scope -> {
     order(unique_index: :desc)

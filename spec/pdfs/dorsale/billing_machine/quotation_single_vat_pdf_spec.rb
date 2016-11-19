@@ -31,8 +31,7 @@ describe ::Dorsale::BillingMachine::QuotationSingleVatPdf, pdfs: true do
   end
 
   it "should work with empty quotation" do
-    id_card = Dorsale::BillingMachine::IdCard.new
-    quotation = ::Dorsale::BillingMachine::Quotation.new(id_card: id_card)
+    quotation = ::Dorsale::BillingMachine::Quotation.new
 
     expect {
       quotation.to_pdf

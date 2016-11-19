@@ -1,18 +1,18 @@
 Given(/^an existing quotation$/) do
-  @quotation = create(:billing_machine_quotation, id_card: @id_card, customer: @customer)
+  @quotation = create(:billing_machine_quotation, customer: @customer)
   @quotation.lines.create(quantity: 1, unit_price: 9.99)
 end
 
 Given(/^(\d+) existing quotations$/) do |nb|
-  create_list(:billing_machine_quotation, nb.to_i, id_card: @id_card)
+  create_list(:billing_machine_quotation, nb.to_i)
 end
 
 Given(/^an existing emtpy quotation$/) do
-  @quotation = create(:billing_machine_quotation, label: nil, customer: nil, id_card: @id_card)
+  @quotation = create(:billing_machine_quotation, label: nil, customer: nil)
 end
 
 Given(/^an existing quotation with a "(.*?)"% VAT rate$/) do |rate|
-  @quotation = create(:billing_machine_quotation, id_card: @id_card)
+  @quotation = create(:billing_machine_quotation)
   create(:billing_machine_quotation_line, vat_rate: rate, quotation: @quotation)
 end
 
@@ -31,38 +31,31 @@ Given(/^a bunch of existing quotations$/) do
   i3 = create(:customer_vault_individual, first_name: 'Eh')
 
   create(:billing_machine_quotation,
-    :id_card  => @id_card,
     :customer => c1,
     :date     => Time.zone.now.to_date,
   )
   create(:billing_machine_quotation,
-    :id_card  => @id_card,
     :customer => c2,
     :date     => Time.zone.now.to_date,
   )
   create(:billing_machine_quotation,
-    :id_card  => @id_card,
     :customer => c3,
     :date     => Time.zone.now.to_date,
   )
   create(:billing_machine_quotation,
-    :id_card  => @id_card,
     :customer => c1,
     :date     => Time.zone.now.to_date - 2.days,
   )
 
   create(:billing_machine_quotation,
-    :id_card  => @id_card,
     :customer => i1,
     :date     => Time.zone.now.to_date - 3.days,
   )
   create(:billing_machine_quotation,
-    :id_card  => @id_card,
     :customer => i2,
     :date     => Time.zone.now.to_date - 3.days,
   )
   create(:billing_machine_quotation,
-    :id_card  => @id_card,
     :customer => i3,
     :date     => Time.zone.now.to_date - 3.days,
   )

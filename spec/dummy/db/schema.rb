@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118071317) do
+ActiveRecord::Schema.define(version: 20161119064536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,41 +67,6 @@ ActiveRecord::Schema.define(version: 20161118071317) do
     t.index ["sender_type"], name: "index_dorsale_alexandrie_attachments_on_sender_type", using: :btree
   end
 
-  create_table "dorsale_billing_machine_id_cards", force: :cascade do |t|
-    t.string   "id_card_name"
-    t.string   "entity_name"
-    t.string   "siret"
-    t.string   "legal_form"
-    t.integer  "capital"
-    t.string   "registration_number"
-    t.string   "intracommunity_vat"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "zip"
-    t.string   "city"
-    t.string   "phone"
-    t.string   "contact_full_name"
-    t.string   "contact_phone"
-    t.string   "contact_address_1"
-    t.string   "contact_address_2"
-    t.string   "contact_zip"
-    t.string   "contact_city"
-    t.string   "iban"
-    t.string   "bic_swift"
-    t.string   "bank_name"
-    t.string   "bank_address"
-    t.string   "ape_naf"
-    t.text     "custom_info_1"
-    t.text     "custom_info_2"
-    t.text     "custom_info_3"
-    t.string   "contact_fax"
-    t.string   "contact_email"
-    t.string   "logo"
-    t.string   "registration_city"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
   create_table "dorsale_billing_machine_invoice_lines", force: :cascade do |t|
     t.integer  "invoice_id"
     t.text     "label"
@@ -119,7 +84,6 @@ ActiveRecord::Schema.define(version: 20161118071317) do
     t.integer  "customer_id"
     t.string   "customer_type"
     t.integer  "payment_term_id"
-    t.integer  "id_card_id"
     t.date     "date"
     t.string   "label"
     t.decimal  "total_excluding_taxes"
@@ -137,7 +101,6 @@ ActiveRecord::Schema.define(version: 20161118071317) do
     t.text     "comments"
     t.index ["customer_id"], name: "index_dorsale_billing_machine_invoices_on_customer_id", using: :btree
     t.index ["customer_type"], name: "index_dorsale_billing_machine_invoices_on_customer_type", using: :btree
-    t.index ["id_card_id"], name: "index_dorsale_billing_machine_invoices_on_id_card_id", using: :btree
     t.index ["payment_term_id"], name: "index_dorsale_billing_machine_invoices_on_payment_term_id", using: :btree
     t.index ["tracking_id"], name: "index_dorsale_billing_machine_invoices_on_tracking_id", using: :btree
   end
@@ -164,7 +127,6 @@ ActiveRecord::Schema.define(version: 20161118071317) do
   create_table "dorsale_billing_machine_quotations", force: :cascade do |t|
     t.integer  "customer_id"
     t.string   "customer_type"
-    t.integer  "id_card_id"
     t.integer  "payment_term_id"
     t.date     "date"
     t.string   "label"
@@ -181,7 +143,6 @@ ActiveRecord::Schema.define(version: 20161118071317) do
     t.string   "state"
     t.index ["customer_id"], name: "index_dorsale_billing_machine_quotations_on_customer_id", using: :btree
     t.index ["customer_type"], name: "index_dorsale_billing_machine_quotations_on_customer_type", using: :btree
-    t.index ["id_card_id"], name: "index_dorsale_billing_machine_quotations_on_id_card_id", using: :btree
     t.index ["payment_term_id"], name: "index_dorsale_billing_machine_quotations_on_payment_term_id", using: :btree
     t.index ["tracking_id"], name: "index_dorsale_billing_machine_quotations_on_tracking_id", using: :btree
   end
