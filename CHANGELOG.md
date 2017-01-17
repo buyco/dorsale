@@ -2,6 +2,19 @@
 
 ## Next version
 
+Nothing.
+
+## 3.3.0
+
+- Add download of all invoices in pdf
+- Rename `render_dorsale_index` to `render_dorsale_page`
+- Replace `render_contextual` by `render_dorsale_page`
+- Change some view/partial names
+- Fix js reset button
+- Print CSS add flash
+
+## 3.2.0
+
 - Add print CSS
 - UUID friendly
 - Add missing indexes
@@ -11,8 +24,9 @@
 - Add invoices chart
 - CustomerVault improvements + add invoices tab
 - Comments improvements
-- Remove tasks PDF and CSV export (XLS still present)
-- Convert CSV exports to XLS
+- Remove tasks PDF and CSV export (XLSX still present)
+- Convert CSV exports to XLSX
+- XLSX Serializer improvements
 
 ## 3.1.7
 
