@@ -1,4 +1,3 @@
-
 module Dorsale::BillingMachine::QuotationPdfCommonMethods
   def build_bank_informations
   end

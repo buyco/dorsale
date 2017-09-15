@@ -1,7 +1,5 @@
 class Dorsale::BillingMachine::InvoiceSingleVatPdf < Dorsale::ApplicationPdf
   include Dorsale::Alexandrie::Prawn::RenderWithAttachments
-  include Dorsale::AllHelpers
-  include ActionView::Helpers::NumberHelper
 
   def attachments
     @main_document.try(:attachments) || []
@@ -9,10 +7,8 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Dorsale::ApplicationPdf
 
   DEBUG = false
 
-  GREY       = "808080"
-  LIGHT_GREY = "C0C0C0"
-  WHITE      = "FFFFFF"
   BLACK      = "000000"
+  WHITE      = "FFFFFF"
   GREY       = "808080"
   LIGHT_GREY = "C0C0C0"
 
