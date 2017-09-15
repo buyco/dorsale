@@ -20,6 +20,8 @@ class Dorsale::BillingMachine::Quotation < ::Dorsale::ApplicationRecord
 
   polymorphic_id_for :customer
 
+  mount_uploader :pdf_file, ::Dorsale::PdfUploader
+
   validates :date,  presence: true
   validates :state, presence: true, inclusion: {in: proc { STATES } }
 
@@ -116,9 +118,7 @@ class Dorsale::BillingMachine::Quotation < ::Dorsale::ApplicationRecord
     end
   end
 
-  def to_pdf
-    ::Dorsale::BillingMachine.quotation_pdf_model.new(self)
-      .tap(&:build)
-      .render_with_attachments
+  def after_attachments_changes
+    Dorsale::BillingMachine::PdfFileGenerator.(self)
   end
 end

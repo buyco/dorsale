@@ -16,12 +16,14 @@ describe ::Dorsale::BillingMachine::InvoiceMultipleVatPdf, pdfs: true do
     i
   }
 
+  let(:generate!) {
+    Dorsale::BillingMachine::PdfFileGenerator.(invoice)
+    invoice.reload
+  }
+
   let(:content) {
-    tempfile = Tempfile.new("pdf")
-    tempfile.binmode
-    tempfile.write(invoice.to_pdf)
-    tempfile.flush
-    Yomu.new(tempfile.path).text
+    generate!
+    Yomu.new(invoice.pdf_file.path).text
   }
 
   it "should not display global vat rate" do
@@ -34,7 +36,7 @@ describe ::Dorsale::BillingMachine::InvoiceMultipleVatPdf, pdfs: true do
     invoice = ::Dorsale::BillingMachine::Invoice.new
 
     expect {
-      invoice.to_pdf
+      described_class.new(invoice).tap(&:build).render_with_attachments
     }.to_not raise_error
   end
 

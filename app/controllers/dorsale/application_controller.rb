@@ -1,6 +1,7 @@
 class Dorsale::ApplicationController < ::ApplicationController
   include Pundit
-  include Dorsale::BackUrlConcern
+  include Agilibox::BackUrlConcern
+  include Agilibox::SortingHelper
 
   after_action :verify_authorized
   after_action :verify_policy_scoped
@@ -13,11 +14,16 @@ class Dorsale::ApplicationController < ::ApplicationController
     end
   }
 
+  def filters_jar
+    cookies
+  end
+
   def model
     raise NotImplementedError
   end
 
   helper_method :model
+  helper_method :filters_jar
 
   def scope
     policy_scope(model)

@@ -16,12 +16,14 @@ describe ::Dorsale::BillingMachine::QuotationSingleVatPdf, pdfs: true do
     q
   }
 
+  let(:generate!) {
+    Dorsale::BillingMachine::PdfFileGenerator.(quotation)
+    quotation.reload
+  }
+
   let(:content) {
-    tempfile = Tempfile.new("pdf")
-    tempfile.binmode
-    tempfile.write(quotation.to_pdf)
-    tempfile.flush
-    Yomu.new(tempfile.path).text
+    generate!
+    Yomu.new(quotation.pdf_file.path).text
   }
 
   it "should display global vat rate" do
@@ -34,20 +36,22 @@ describe ::Dorsale::BillingMachine::QuotationSingleVatPdf, pdfs: true do
     quotation = ::Dorsale::BillingMachine::Quotation.new
 
     expect {
-      quotation.to_pdf
+      described_class.new(quotation).tap(&:build).render_with_attachments
     }.to_not raise_error
   end
 
-  describe "attachment" do
-    it "should build attachments" do
+  describe "attachments" do
+    let(:quotation) {
       quotation  = create(:billing_machine_quotation)
       attachment = create(:alexandrie_attachment, attachable: quotation)
+      quotation
+    }
 
-      text = Yomu.read(:text, quotation.to_pdf).split("\n")
-      expect(text).to include "page 1"
-      expect(text).to include "page 2"
+    it "should build attachments" do
+      expect(content).to include "page 1"
+      expect(content).to include "page 2"
     end
-  end
+  end # describe "attachments"
 
 end
 

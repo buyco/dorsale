@@ -54,6 +54,31 @@ RSpec.describe ::Dorsale::CustomerVault::PeopleController, type: :controller do
 
         expect(assigns(:people)).to eq [individual]
       end
+
+      it "should filter by person origin" do
+        @origin = create(:customer_vault_origin)
+        individual  = create(:customer_vault_individual, origin: @origin)
+        corporation = create(:customer_vault_corporation)
+
+        cookies[:filters] = {person_origin: @origin.id}.to_json
+
+        get :index
+
+        expect(assigns(:people)).to eq [individual]
+      end
+
+      it "should filter by person activity" do
+        @activity = create(:customer_vault_activity_type)
+        corpo1 = create(:customer_vault_corporation, activity_type: @activity)
+        individual  = create(:customer_vault_individual, corporation: corpo1)
+        corpo2 = create(:customer_vault_corporation)
+
+        cookies[:filters] = {person_activity: @activity.id}.to_json
+
+        get :index
+
+        expect(assigns(:people)).to contain_exactly(corpo1, individual)
+      end
     end # describe "filters"
 
     describe "search" do
@@ -65,20 +90,44 @@ RSpec.describe ::Dorsale::CustomerVault::PeopleController, type: :controller do
         expect(assigns(:people)).to eq [corporation2]
       end
     end # describe "search"
-  end # describe "#liwt"
+  end # describe "#list"
 
-  describe "#activity" do
+  describe "#create" do
     before do
-      @person = create(:customer_vault_corporation)
-      @comment1 = @person.comments.create!(text: "ABC", created_at: Time.zone.now - 3.days, author: user)
-      @comment2 = @person.comments.create!(text: "DEF", created_at: Time.zone.now - 2.days, author: user)
-      @comment3 = @person.comments.create!(text: "DEF", created_at: Time.zone.now - 9.days, author: user)
+      allow_any_instance_of(Dorsale::CustomerVault::PeopleController).to \
+      receive(:model) { Dorsale::CustomerVault::Corporation }
     end
 
-    it "should assigns all comments ordered by created_at DESC" do
-      get :activity
-      expect(assigns(:comments)).to eq [@comment2, @comment1, @comment3]
+    it "should generate an event" do
+      expect {
+        post :create, params: {person: {corporation_name: "agilidée"}}
+      }.to change(Dorsale::CustomerVault::Event, :count).by(1)
+
+      event = Dorsale::CustomerVault::Event.last_created
+      expect(event.author).to eq user
+      expect(event.person).to eq Dorsale::CustomerVault::Person.last_created
+      expect(event.action).to eq "create"
     end
-  end # describe "#activity"
+  end # describe "#create"
+
+  describe "#update" do
+    before do
+      allow_any_instance_of(Dorsale::CustomerVault::PeopleController).to \
+      receive(:model) { Dorsale::CustomerVault::Corporation }
+    end
+
+    it "should generate an event" do
+      corporation = create(:customer_vault_corporation)
+
+      expect {
+        patch :update, params: {id: corporation, person: {corporation_name: "agilidée"}}
+      }.to change(Dorsale::CustomerVault::Event, :count).by(1)
+
+      event = Dorsale::CustomerVault::Event.last_created
+      expect(event.author).to eq user
+      expect(event.person).to eq corporation
+      expect(event.action).to eq "update"
+    end
+  end # describe "#update"
 
 end

@@ -2,7 +2,69 @@
 
 ## Next version
 
-Nothing.
+## 3.7.4
+
+- Change nilify_blanks config
+- CustomerVault Events : persist text
+- CustomerVault : delete event when deleting comment
+- Comments : fix double comments JS
+- CustomerVault : do not validate events author
+- CustomerVault : move PeopleController#activity to EventsController#index
+- CustomerVault : add events filters
+
+## 3.7.3
+- Fix copy action
+
+## 3.7.2
+- Add sorting for task comments
+- Add copy for tasks
+- Add comment when reporting
+
+## 3.7.1
+- Add activity type and origin filters for people
+- Add activity type and origin in people export
+
+## 3.7.0
+
+- Remove some useless "polymorphic" belongs_to
+- Add `comment?` action to task policy
+- CustomerVault : origins and activity types
+
+## 3.6.1
+
+- CSS fix
+
+## 3.6.0
+
+- Task term and reminder improvements
+- Add CustomerVault events
+
+## 3.5.2
+
+- Comments improvements
+- Add infos to people context
+
+## 3.5.1
+
+- Add title and date to comments
+- Truncate comments
+- CustomerVault : individual belongs to corporation
+- CustomerVault : add/remove fields
+
+## 3.5.0
+
+- Move helpers/i18n/... to agilibox gem
+  - rename `dorsale_button` helper to `bs_button`
+  - rename `dorsale_time_periods_for_select` helper to `agilibox_time_periods_for_select`
+
+## 3.4.0
+
+- Delete Flyboy folders
+- Add `link_to_object` helper
+- Change/fix expense states (new -> draft, submited -> submitted)
+- Persist invoice/quotation PDFs after save
+- Add concerns to ApplicationRecord and stop pollute ActiveRecord::Base
+- Replace abandoned gem handles_sortable_columns
 
 ## 3.3.0
 

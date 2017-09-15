@@ -1,14 +1,14 @@
 class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::ApplicationController
-  handles_sortable_columns
-
   before_action :set_objects
 
   def index
     authorize model, :list?
 
-    @filters ||= ::Dorsale::CustomerVault::SmallData::FilterForPeople.new(cookies)
-    @tags    ||= customer_vault_tag_list
-    @people  ||= policy_scope(model)
+    @filters        ||= ::Dorsale::CustomerVault::SmallData::FilterForPeople.new(filters_jar)
+    @tags           ||= customer_vault_tag_list
+    @origins        ||= policy_scope(Dorsale::CustomerVault::Origin)
+    @activity_types ||= policy_scope(Dorsale::CustomerVault::ActivityType)
+    @people         ||= policy_scope(model)
       .search(params[:q])
       .preload(:taggings)
 
@@ -31,19 +31,6 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
     render :index
   end
 
-  def activity
-    authorize model, :list?
-
-    @people ||= scope
-
-    @comments ||= policy_scope(::Dorsale::Comment)
-      .where("commentable_type LIKE ?", "%CustomerVault%")
-      .order("created_at DESC, id DESC")
-      .preload(:commentable, :author)
-
-    @comments = @comments.page(params[:page]).per(50)
-  end
-
   def new
     authorize model, :create?
 
@@ -64,6 +51,7 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
     @person ||= scope.new(person_params_for_create)
 
     if @person.save
+      generate_event!("create")
       flash[:notice] = t("messages.#{person_type.to_s.pluralize}.create_ok")
       redirect_to back_url
     else
@@ -93,6 +81,7 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
     authorize @person, :update?
 
     if @person.update(person_params_for_update)
+      generate_event!("update")
       flash[:notice] = t("messages.#{person_type.to_s.pluralize}.update_ok")
       redirect_to back_url
     else
@@ -157,6 +146,9 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
       :facebook,
       :linkedin,
       :viadeo,
+      :context,
+      :origin_id,
+      :activity_type_id,
       :tag_list => [],
       :address_attributes => [
         :street,
@@ -172,19 +164,21 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
     common_permitted_params + [
       :corporation_name,
       :capital,
-      :immatriculation_number_1,
-      :immatriculation_number_2,
+      :immatriculation_number,
       :european_union_vat_number,
       :legal_form,
+      :revenue,
+      :societe_com,
+      :number_of_employees,
     ]
   end
 
   def permitted_params_for_individuals
     common_permitted_params + [
+      :corporation_id,
       :first_name,
       :last_name,
       :title,
-      :context,
     ]
   end
 
@@ -204,6 +198,15 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
 
   def person_params_for_update
     person_params
+  end
+
+  def generate_event!(action)
+    policy_scope(::Dorsale::CustomerVault::Event).create!(
+      :author => current_user,
+      :person => @person,
+      :action => action,
+      :text   => ::Dorsale::CustomerVault::Event.t("text.#{action}")
+    )
   end
 
 end

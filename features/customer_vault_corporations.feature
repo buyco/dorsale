@@ -11,7 +11,7 @@ Feature: Manage corporations
     When I create an new corporation
     And I add the corporation's informations
     And I fill the corporation's address
-    And I fill the corporation capital, immatriculation1, immatriculation2, legal form
+    And I fill the corporation capital, immatriculation, legal form
     And I validate the new corporation
     Then the corporation is created
     And I am on the corporation page
@@ -79,7 +79,7 @@ Feature: Manage corporations
     When I go on the people activity
     Then I see all these comments
 
-  Scenario: People activity
+  Scenario: People activity pagination
     Given an existing corporation with 150 comments
     When I go on the people activity
     Then I see these comments paginated

@@ -1,6 +1,3 @@
-# encoding: utf-8
-require "rake"
-
 Given(/^an existing done task$/) do
   @done_task = create(:flyboy_task, done: true)
 end
@@ -14,14 +11,12 @@ Given(/^an existing task named "(.*?)"$/) do |name|
 end
 
 Given(/^an existing task$/) do
-  @task   = create(:flyboy_task)
-  @folder = @task.taskable
+  @task = create(:flyboy_task)
 end
 
 Given(/^an existing snoozable task$/) do
-  create(:flyboy_task,
-    :reminder => Date.yesterday,
-    :term     => Time.zone.now.to_date
+  @task = create(:flyboy_task,
+    :term => Time.zone.now.to_date,
   )
 end
 
@@ -33,27 +28,30 @@ end
 
 Given(/^a task with an owner that's the term is today$/) do
   @task = create(:flyboy_task,
-    :reminder => Date.yesterday,
-    :term     => Time.zone.now.to_date,
-    :owner    => create(:user),
+    :term          => Time.zone.now.to_date,
+    :reminder_type => "custom",
+    :reminder_date => Date.yesterday,
+    :owner         => create(:user),
   )
 end
 
 Given(/^a task without owner$/) do
   @task = create(:flyboy_task,
-    :reminder => Date.yesterday,
-    :term     => Time.zone.now.to_date,
-    :owner    => nil,
+    :term          => Time.zone.now.to_date,
+    :reminder_type => "custom",
+    :reminder_date => Date.yesterday,
+    :owner         => nil,
   )
 end
 
 Given(/^a closed task with an owner$/) do
   @task = create(:flyboy_task,
-    :reminder => Date.yesterday,
-    :term     => Time.zone.now.to_date,
-    :owner    => create(:user),
-    :progress => 100,
-    :done     => true,
+    :term          => Time.zone.now.to_date,
+    :reminder_type => "custom",
+    :reminder_date => Date.yesterday,
+    :owner         => create(:user),
+    :progress      => 100,
+    :done          => true,
   )
 end
 
@@ -63,7 +61,7 @@ When(/^the flyboy daily crons run$/) do
 end
 
 When(/^I create a task$/) do
-  find("#context-main a[href*='tasks/new']").click
+  find("a[href*='tasks/new']").click
   find("form[id*=task] [type=submit]").click # First submit to see errors
   fill_in "task_name", with: "I-am-the-task-title"
   fill_in "task_description", with: "I-am-the-task-description"
@@ -148,7 +146,7 @@ Then(/^the task is completed$/) do
 end
 
 Then(/^the task is snoozed$/) do
-  expect(all("a[href*=snooze]").count).to eq 0
+  expect(page).to have_no_selector "a[href*=snooze]"
 end
 
 Then(/^I am on this task$/) do
@@ -189,4 +187,13 @@ Then(/^the owner receive an email$/) do
   expect(ActionMailer::Base.deliveries.count).to eq 1
   email = ActionMailer::Base.deliveries.last
   expect(email.to).to include @task.owner.email
+end
+
+When(/^I go on the new task page$/) do
+  visit dorsale.new_flyboy_task_path
+end
+
+Then(/^selected task term is "([^"]*)"$/) do |expected_value|
+  value = find("#task_term option[selected]").text
+  expect(value).to eq expected_value
 end

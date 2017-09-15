@@ -4,17 +4,17 @@ table#tasks-list
       th.task-status
       th.task-snooze
       th.task-progress.hidden-xs
-        = sortable_column Dorsale::Flyboy::Task.t(:progress), column: "progress"
+        = sortable_column Dorsale::Flyboy::Task.t(:progress), :progress
 
       th.task-name
-        = sortable_column Dorsale::Flyboy::Task.t, column: "name"
+        = sortable_column Dorsale::Flyboy::Task.t, :name
 
       - unless nested
         th.taskable-name.hidden-xs
-          = sortable_column Dorsale::Flyboy::Task.t(:taskable), column: "taskable"
+          = sortable_column Dorsale::Flyboy::Task.t(:taskable), :taskable
 
       th.task-term.hidden-xs
-        = sortable_column Dorsale::Flyboy::Task.t(:term),  column: "term"
+        = sortable_column Dorsale::Flyboy::Task.t(:term), :term
 
   tbody
     - tasks.each do |task|
@@ -51,17 +51,11 @@ table#tasks-list
           = progress_bar percentage: task.progress, label: true
 
         td.task-name
-          - if policy(task).read?
-            = link_to task.to_s, dorsale.flyboy_task_path(task)
-          - else
-            = task.to_s
+          = link_to_object(task)
 
         - unless nested
           td.taskable-name.hidden-xs
-            - if policy(task.taskable).read?
-              = link_to task.taskable.to_s, engine_polymorphic_path(task.taskable)
-            - else
-              = task.taskable.to_s
+            = link_to_object(task.taskable)
 
         td.task-term.hidden-xs
           = date(task.term)

@@ -16,11 +16,14 @@ When(/^I add the corporation's informations$/) do
   fill_in 'person_fax', with: '09 00 00 00 00'
 end
 
-When(/^I fill the corporation capital, immatriculation1, immatriculation2, legal form$/) do
+When(/^I fill the corporation capital, immatriculation, legal form$/) do
   fill_in 'person_capital', with: '1000'
-  fill_in 'person_immatriculation_number_1', with: 'RCS 201523658'
-  fill_in 'person_immatriculation_number_2', with: 'SIREN 5485632569'
+  fill_in 'person_immatriculation_number', with: 'RCS 201523658'
   fill_in 'person_legal_form', with: 'SARL'
+  fill_in 'person_number_of_employees', with: '45'
+  fill_in 'person_revenue', with: "450000"
+  fill_in 'person_context', with: "Le joli contexte"
+  fill_in 'person_societe_com', with: "societe_com"
 end
 
 When(/^I fill the corporation's address$/) do
@@ -71,7 +74,7 @@ end
 Then(/^I see my new comment$/) do
   expect(Dorsale::Comment.count).to eq(@comments_count + 1)
 
-  expect(find(".comment p.text")).to have_content "MyNewComment"
+  expect(find("p.comment-text")).to have_content "MyNewComment"
 end
 
 Given(/^an existing comment on this corporation$/) do
@@ -87,7 +90,7 @@ When(/^I update the comment$/) do
 end
 
 Then(/^I see my updated comment$/) do
-  expect(find(".comment p.text")).to have_content "MyUpdatedComment"
+  expect(find("p.comment-text")).to have_content "MyUpdatedComment"
 end
 
 When(/^I delete the comment$/) do
@@ -102,18 +105,18 @@ end
 
 Given(/^an existing individual with recent comments$/) do
   @individual = create(:customer_vault_individual)
-  @individual_comment1 = @individual.comments.create(text: "individual-comment-1", author: @user)
-  @individual_comment2 = @individual.comments.create(text: "individual-comment-2", author: @user)
+  create(:dorsale_comment, commentable: @individual, text: "individual-comment-1")
+  create(:dorsale_comment, commentable: @individual, text: "individual-comment-2")
 end
 
 Given(/^an existing corporation with recent comments$/) do
   @corporation = create(:customer_vault_corporation)
-  @corporation_comment1 = @corporation.comments.create(text: "corporation-comment-1", author: @user)
-  @corporation_comment2 = @corporation.comments.create(text: "corporation-comment-2", author: @user)
+  create(:dorsale_comment, commentable: @corporation, text: "corporation-comment-1")
+  create(:dorsale_comment, commentable: @corporation, text: "corporation-comment-2")
 end
 
 When(/^I go on the people activity$/) do
-  visit dorsale.customer_vault_people_activity_path
+  visit dorsale.customer_vault_events_path
 end
 
 Then(/^I see all these comments$/) do
@@ -124,9 +127,10 @@ Then(/^I see all these comments$/) do
 end
 
 Given(/^an existing corporation with (\d+) comments$/) do |n|
+  step "an existing corporation"
+
   n.to_i.times do
-    @corporation = create(:customer_vault_corporation)
-    @corporation.comments.create(text: "abc", author: @user)
+    create(:dorsale_comment, commentable: @corporation)
   end
 end
 

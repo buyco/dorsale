@@ -10,6 +10,8 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
 
   polymorphic_id_for :customer
 
+  mount_uploader :pdf_file, ::Dorsale::PdfUploader
+
   validates :date, presence: true
 
   default_scope -> {
@@ -135,11 +137,5 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
 
   def balance=(*); super; end
   private :balance=
-
-  def to_pdf
-    ::Dorsale::BillingMachine.invoice_pdf_model.new(self)
-      .tap(&:build)
-      .render
-  end
 
 end

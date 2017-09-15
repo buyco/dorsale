@@ -2,15 +2,6 @@ fr:
   messages:
     forbidden: "Cette page ne peut être trouvée"
 
-    folders:
-      title_create: "Nouveau dossier"
-      create_ok: "Le dossier a bien été créé"
-      update_ok: "Le dossier a bien été modifié"
-      open_ok: "Le dossier a été réouvert"
-      open_error: "Impossible de réouvrir le dossier"
-      close_ok: "Le dossier a été fermé"
-      close_error: "Impossible de fermer le dossier"
-
     tasks:
       create_ok: "La tâche a bien été créée"
       update_ok: "La tâche a bien été modifiée"
@@ -20,6 +11,8 @@ fr:
       snooze_eror: "Impossible de reporter la tâche"
       complete_ok: "La tâche a été marquée comme terminée"
       complete_eror: "Impossible de terminer la tâche"
+      copy_ok: "La tâche a été copiée"
+      copy_ko: "Impossible de copier cette tâche"
 
   task_mailer:
     new_task:
@@ -33,15 +26,8 @@ fr:
   actions:
     label: "Actions"
 
-    folders:
-      new_task: "Nouvelle tâche"
-
   activerecord:
     models:
-      dorsale/flyboy/folder:
-        one: "Dossier"
-        other: "Dossiers"
-
       dorsale/flyboy/task:
         one: "Tâche"
         other: "Tâches"
@@ -51,32 +37,24 @@ fr:
         other: "Commentaires de tâche"
 
     attributes:
-      dorsale/flyboy/folder:
-        folderable: "Origine"
-        name: "Titre"
-        status: "Status"
-        description: "Description"
-        revision: "Révision"
-        status: "Etat"
-        progress: "Progression"
-
-      dorsale/flyboy/folder/status:
+      dorsale/flyboy/task/status:
         all: "Tous les status"
         open: "Ouvert"
-        pending: "En attente"
         closed: "Fermé"
         unknown: "Inconnu"
 
       dorsale/flyboy/task:
         taskable: "Origine"
         taskable_type: "Type origine"
-        taskable_progress: "Progression origine"
         owner: "Propriétaire"
         owner_id: "Propriétaire"
-        owner_guid: "Propriétaire"
         created_at: "Créée le"
         name: "Titre"
         reminder: "Rappel"
+        reminder_type: "Type de rappel"
+        reminder_date: "Date de rappel"
+        reminder_duration: "Durée du rappel"
+        reminder_unit: "Unité du rappel"
         term: "Echéance"
         done: "Fait"
         description: "Description"
@@ -86,3 +64,20 @@ fr:
         progress: "Progression"
         description: "Description"
         task: "Tâche"
+
+      dorsale/flyboy/task/reminder_type:
+        none: "Aucun"
+        duration: "Durée"
+        custom: "Date"
+
+      dorsale/flyboy/task/reminder_unit:
+        days: "Jour(s)"
+        weeks: "Semaine(s)"
+        months: "Mois"
+
+      dorsale/flyboy/task/term_value:
+        today: "Aujourd'hui"
+        tomorrow: "Demain"
+        this_week: "Cette semaine"
+        next_week: "La semaine prochaine"
+        custom: "Choisir une date"

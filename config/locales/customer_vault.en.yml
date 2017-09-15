@@ -1,11 +1,18 @@
 en:
   customer_vault:
     name: "Directory"
-    activity: "Activity"
     identity_informations: "Identity informations"
     contact_informations: "Contact informations"
     address_informations: "Address informations"
     additional_informations: "Additional informations"
+
+    origin:
+      actions:
+        create: "New origin"
+
+    activity_type:
+      actions:
+        create: "New activity type"
 
   messages:
     no_people: "No people find."
@@ -29,6 +36,14 @@ en:
       delete_ok    : "Link deleted."
       delete_error : "One error occurs, link not deleted."
 
+    origins:
+      create_ok    : "Origin created."
+      update_ok    : "Origin updated."
+
+    activity_types:
+      create_ok    : "Activity created."
+      update_ok    : "Activity updated."
+
   actions:
     new_individual: "New individual"
     new_corporation: "New corporation"
@@ -50,19 +65,40 @@ en:
       dorsale/customer_vault/link:
         one: "Link"
         other: "Links"
+      dorsale/customer_vault/event:
+        one: "Activity"
+        other: "Activity"
+      dorsale/customer_vault/origin:
+        one: "Origin"
+        other: "Origin"
+      dorsale/customer_vault/activity_type:
+        one: "Activity type"
+        other: "Activity types"
+
 
     attributes:
       dorsale/customer_vault/person: &customer_vault_person_attributes
         context: "Context"
         all_tags: "All tags"
+        all_origins: "All origins"
+        all_activity_types: "All activities"
         all_types: "All types"
         capital: "Capital"
-        immatriculation_number_1: "Immatriculation number 1"
-        immatriculation_number_2: "Immatriculation number 2"
+        immatriculation_number: "Immatriculation number 1"
+        revenue: "Revenue"
+        number_of_employees: "Number of employees"
+        naf: "NAF"
+        societe_com: "Societe.com"
+        corporation: "Corporation"
         european_union_vat_number: "European union VAT number"
         legal_form: "Legal form"
         count: "Number of people"
         person_type: "Type"
+        title: "Title"
+        individuals: "Individuals"
+        origin: "Origin"
+        activity_type: "Activity type"
+
       dorsale/customer_vault/individual:
         <<: *customer_vault_person_attributes
       dorsale/customer_vault/corporation:
@@ -70,3 +106,15 @@ en:
       dorsale/customer_vault/link:
         alice: "Person"
         bob: "Person"
+      dorsale/customer_vault/event:
+        action: "Activity type"
+        person: "Person"
+        authored_by: "by"
+        all_actions: "All types"
+      dorsale/customer_vault/event/action:
+        create: "Create"
+        update: "Update"
+        comment: "Comment"
+      dorsale/customer_vault/event/text:
+        create: "Creation of the person"
+        update: "Update person informations"

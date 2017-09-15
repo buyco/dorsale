@@ -13,7 +13,7 @@ class Dorsale::BillingMachine::InvoicesController < ::Dorsale::BillingMachine::A
     authorize model, :list?
 
     @invoices ||= scope.all.preload(:customer)
-    @filters  ||= ::Dorsale::BillingMachine::SmallData::FilterForInvoices.new(cookies)
+    @filters  ||= ::Dorsale::BillingMachine::SmallData::FilterForInvoices.new(filters_jar)
 
     @invoices = @filters.apply(@invoices)
     @invoices_without_pagination = @invoices
@@ -38,6 +38,7 @@ class Dorsale::BillingMachine::InvoicesController < ::Dorsale::BillingMachine::A
     authorize model, :create?
 
     if @invoice.save
+      Dorsale::BillingMachine::PdfFileGenerator.(@invoice)
       flash[:notice] = t("messages.invoices.create_ok")
       redirect_to default_back_url
     else
@@ -77,6 +78,7 @@ class Dorsale::BillingMachine::InvoicesController < ::Dorsale::BillingMachine::A
     authorize @invoice, :update?
 
     if @invoice.update(invoice_params_for_update)
+      Dorsale::BillingMachine::PdfFileGenerator.(@invoice)
       flash[:notice] = t("messages.invoices.update_ok")
       redirect_to default_back_url
     else

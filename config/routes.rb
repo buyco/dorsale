@@ -7,12 +7,6 @@ Dorsale::Engine.routes.draw do
 
   resources :users, except: [:destroy]
 
-  # Small Sata / Filters
-
-  namespace :small_data do
-    resources :filters, only: [:create]
-  end
-
   # Alexandrie / Attachments
 
   namespace :alexandrie do
@@ -22,18 +16,12 @@ Dorsale::Engine.routes.draw do
   # Flyboy
 
   namespace :flyboy do
-    resources :folders do
-      member do
-        patch :open
-        patch :close
-      end
-    end
-
     resources :tasks do
       get :summary, on: :collection
       member do
         patch :complete
         patch :snooze
+        patch :copy
       end
     end
 
@@ -65,9 +53,11 @@ Dorsale::Engine.routes.draw do
   get "customer_vault/individuals"  => "customer_vault/people#individuals"
 
   namespace :customer_vault do
-    namespace :people do
-      get :activity
-    end
+
+    resources :activity_types, except: [:destroy, :show]
+    resources :origins, except: [:destroy, :show]
+
+    resources :events, only: [:index]
 
     resources :people do
       resources :links

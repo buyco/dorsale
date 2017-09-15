@@ -1,10 +1,8 @@
-require "dorsale/search"
-
 class Dorsale::CustomerVault::Person < ::Dorsale::ApplicationRecord
   self.table_name = "dorsale_customer_vault_people"
 
   extend Forwardable
-  include ::Dorsale::Search
+  include ::Agilibox::Search
   include ::Dorsale::Users::Avatar
 
   def self.policy_class
@@ -22,17 +20,23 @@ class Dorsale::CustomerVault::Person < ::Dorsale::ApplicationRecord
 
   acts_as_taggable
 
-  has_many :comments, -> { order(created_at: :desc, id: :desc) }, class_name: ::Dorsale::Comment, as: :commentable, dependent: :destroy
+  has_many :comments, class_name: ::Dorsale::Comment, as: :commentable, dependent: :destroy
   has_one :address, class_name: ::Dorsale::Address, as: :addressable, inverse_of: :addressable, dependent: :destroy
   has_many :tasks, class_name: ::Dorsale::Flyboy::Task, as: :taskable, dependent: :destroy
+  has_many :events, dependent: :destroy
   has_many :invoices, class_name: ::Dorsale::BillingMachine::Invoice, as: :customer
   accepts_nested_attributes_for :address, allow_destroy: true
+
+  belongs_to :activity_type, class_name: ::Dorsale::CustomerVault::ActivityType
+  belongs_to :origin, class_name: ::Dorsale::CustomerVault::Origin
 
   after_destroy :destroy_links
 
   default_scope -> {
     order("LOWER(COALESCE(corporation_name, '') || COALESCE(last_name, '') || COALESCE(first_name, '')) ASC")
   }
+
+  after_initialize :build_address, unless: :address
 
   def person_type
     self.class.to_s.demodulize.downcase.to_sym
@@ -66,6 +70,23 @@ class Dorsale::CustomerVault::Person < ::Dorsale::ApplicationRecord
 
   def destroy_links
     links.each(&:destroy!)
+  end
+
+  def receive_comment_notification(comment, action)
+    scope = Pundit.policy_scope!(comment.author, ::Dorsale::CustomerVault::Event)
+
+    if action == :create
+      scope.create!(
+        :author  => comment.author,
+        :person  => self,
+        :comment => comment,
+        :action  => "comment",
+      )
+    end
+
+    if action == :delete
+      scope.where(comment: comment).destroy_all
+    end
   end
 
 end

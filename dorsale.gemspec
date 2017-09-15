@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE.md", "Rakefile", "README.md", "CHANGELOG.md"]
 
   s.add_dependency "rails", ">= 4.0.0"
+  s.add_dependency "agilibox", ">= 1.0.6"
   s.add_dependency "virtus"
   s.add_dependency "slim-rails"
   s.add_dependency "sass-rails"
@@ -36,7 +37,6 @@ Gem::Specification.new do |s|
   s.add_dependency "bootstrap-datepicker-rails"
   s.add_dependency "carrierwave"
   s.add_dependency "aasm"
-  s.add_dependency "handles_sortable_columns"
   s.add_dependency "pdf-reader"
   s.add_dependency "prawn"
   s.add_dependency "prawn-table"

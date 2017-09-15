@@ -7,7 +7,16 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
     :update,
     :destroy,
     :complete,
-    :snooze
+    :snooze,
+    :copy,
+  ]
+
+  before_action :set_owners, only: [
+    :new,
+    :create,
+    :edit,
+    :update,
+    :copy,
   ]
 
   def index
@@ -17,15 +26,15 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
 
     @order ||= sortable_column_order do |column, direction|
       case column
-      when "name", "status"
+      when :name, :status
         %(LOWER(dorsale_flyboy_tasks.#{column}) #{direction})
-      when "progress", "term"
+      when :progress, :term
         %(dorsale_flyboy_tasks.#{column} #{direction})
-      when "taskable"
+      when :taskable
         if direction == :asc
-          proc { |a, b| a.taskable.name.downcase <=> b.taskable.name.downcase }
+          proc { |a, b| a.taskable.to_s.downcase <=> b.taskable.to_s.downcase }
         else
-          proc { |a, b| b.taskable.name.downcase <=> a.taskable.name.downcase }
+          proc { |a, b| b.taskable.to_s.downcase <=> a.taskable.to_s.downcase }
         end
       else
         params["sort"] = "term"
@@ -33,7 +42,7 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
       end
     end
 
-    @filters ||= ::Dorsale::Flyboy::SmallData::FilterForTasks.new(cookies)
+    @filters ||= ::Dorsale::Flyboy::SmallData::FilterForTasks.new(filters_jar)
 
     @tasks = @filters.apply(@tasks)
     @tasks = @tasks.search(params[:q])
@@ -51,13 +60,25 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
 
   def show
     authorize @task, :read?
+    @task_comments = @task.comments
+
+    @order ||= sortable_column_order do |column, direction|
+    case column
+    when :description
+        %(LOWER(#{column}) #{direction})
+      when :progress
+        %(#{column} #{direction})
+      else
+        "date #{direction}"
+      end
+    end
+    @task_comments = @task_comments.reorder(@order)
   end
 
   def new
     @task ||= scope.new
+    @task.owner ||= current_user
     @task.taskable_guid = params[:taskable_guid]
-
-    set_owners
 
     authorize @task, :create?
   end
@@ -72,7 +93,6 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
       notify_owner(current_user, @task)
       redirect_to back_url
     else
-      set_owners
       render :new
     end
   end
@@ -80,7 +100,6 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
   def edit
     authorize @task, :update?
 
-    set_owners
   end
 
   def update
@@ -90,7 +109,6 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
       flash[:success] = t("messages.tasks.update_ok")
       redirect_to back_url
     else
-      set_owners
       render :edit
     end
   end
@@ -129,15 +147,23 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
   def snooze
     authorize @task, :snooze?
 
-    @task.snooze
-
-    if @task.save
+    if @task.snoozer.snooze
+      comment = Dorsale::Flyboy::TaskComment.new(task: @task, progress: @task.progress, description: t("messages.tasks.snooze_ok"), author: current_user)
+      comment.save!
       flash[:success] = t("messages.tasks.snooze_ok")
     else
       flash[:danger] = t("messages.tasks.snooze_error")
     end
 
     redirect_to back_url
+  end
+
+  def copy
+    authorize @task, :copy?
+
+    @original = @task
+    @task  = Dorsale::Flyboy::Task::Copy.(@original)
+    render :new
   end
 
   def summary
@@ -158,12 +184,6 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
     else
       url_for(action: :index, id: nil)
     end
-  end
-
-  def back_url
-    url = super
-    url << "#tasks" if url.include?("customer_vault")
-    url
   end
 
   def notify_owner(author, task)
@@ -189,8 +209,11 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
       :description,
       :progress,
       :term,
-      :reminder,
-      :owner_guid,
+      :reminder_type,
+      :reminder_date,
+      :reminder_duration,
+      :reminder_unit,
+      :owner_id,
     ]
   end
 

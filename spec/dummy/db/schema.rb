@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119064536) do
+ActiveRecord::Schema.define(version: 20170915070538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -55,7 +56,6 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.string   "attachable_type"
     t.string   "file"
     t.integer  "sender_id"
-    t.string   "sender_type"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.index ["attachable_type"], name: "index_dorsale_alexandrie_attachments_on_attachable_type", using: :btree
     t.index ["attachment_type_id"], name: "index_dorsale_alexandrie_attachments_on_attachment_type_id", using: :btree
     t.index ["sender_id"], name: "index_dorsale_alexandrie_attachments_on_sender_id", using: :btree
-    t.index ["sender_type"], name: "index_dorsale_alexandrie_attachments_on_sender_type", using: :btree
   end
 
   create_table "dorsale_billing_machine_invoice_lines", force: :cascade do |t|
@@ -99,6 +98,7 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.string   "tracking_id"
     t.decimal  "commercial_discount"
     t.text     "comments"
+    t.string   "pdf_file"
     t.index ["customer_id"], name: "index_dorsale_billing_machine_invoices_on_customer_id", using: :btree
     t.index ["customer_type"], name: "index_dorsale_billing_machine_invoices_on_customer_type", using: :btree
     t.index ["payment_term_id"], name: "index_dorsale_billing_machine_invoices_on_payment_term_id", using: :btree
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.string   "tracking_id"
     t.decimal  "commercial_discount"
     t.string   "state"
+    t.string   "pdf_file"
     t.index ["customer_id"], name: "index_dorsale_billing_machine_quotations_on_customer_id", using: :btree
     t.index ["customer_type"], name: "index_dorsale_billing_machine_quotations_on_customer_type", using: :btree
     t.index ["payment_term_id"], name: "index_dorsale_billing_machine_quotations_on_payment_term_id", using: :btree
@@ -155,12 +156,18 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.text     "text"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "author_type"
+    t.date     "date"
+    t.string   "title"
     t.index ["author_id"], name: "index_dorsale_comments_on_author_id", using: :btree
-    t.index ["author_type"], name: "index_dorsale_comments_on_author_type", using: :btree
     t.index ["commentable_id"], name: "index_dorsale_comments_on_commentable_id", using: :btree
     t.index ["commentable_type"], name: "index_dorsale_comments_on_commentable_type", using: :btree
     t.index ["user_type"], name: "index_dorsale_comments_on_user_type", using: :btree
+  end
+
+  create_table "dorsale_customer_vault_activity_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dorsale_customer_vault_corporations_bak", force: :cascade do |t|
@@ -177,6 +184,16 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "european_union_vat_number"
+  end
+
+  create_table "dorsale_customer_vault_events", force: :cascade do |t|
+    t.integer  "author_id"
+    t.integer  "person_id"
+    t.integer  "comment_id"
+    t.string   "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "text"
   end
 
   create_table "dorsale_customer_vault_individuals_bak", force: :cascade do |t|
@@ -208,6 +225,12 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.index ["bob_id"], name: "index_dorsale_customer_vault_links_on_bob_id", using: :btree
   end
 
+  create_table "dorsale_customer_vault_origins", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "dorsale_customer_vault_people", force: :cascade do |t|
     t.string   "type"
     t.integer  "old_id"
@@ -229,6 +252,10 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.text     "data"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.text     "context"
+    t.integer  "corporation_id"
+    t.integer  "activity_type_id"
+    t.integer  "origin_id"
     t.index ["old_id"], name: "index_dorsale_customer_vault_people_on_old_id", using: :btree
   end
 
@@ -262,21 +289,6 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.index ["user_id"], name: "index_dorsale_expense_gun_expenses_on_user_id", using: :btree
   end
 
-  create_table "dorsale_flyboy_folders", force: :cascade do |t|
-    t.integer  "folderable_id"
-    t.string   "folderable_type"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "progress"
-    t.string   "status"
-    t.string   "tracking"
-    t.integer  "version"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["folderable_id"], name: "index_dorsale_flyboy_folders_on_folderable_id", using: :btree
-    t.index ["folderable_type"], name: "index_dorsale_flyboy_folders_on_folderable_type", using: :btree
-  end
-
   create_table "dorsale_flyboy_task_comments", force: :cascade do |t|
     t.integer  "task_id"
     t.datetime "date"
@@ -284,10 +296,8 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.integer  "progress"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "author_type"
     t.integer  "author_id"
     t.index ["author_id"], name: "index_dorsale_flyboy_task_comments_on_author_id", using: :btree
-    t.index ["author_type"], name: "index_dorsale_flyboy_task_comments_on_author_type", using: :btree
     t.index ["task_id"], name: "index_dorsale_flyboy_task_comments_on_task_id", using: :btree
   end
 
@@ -299,13 +309,14 @@ ActiveRecord::Schema.define(version: 20161119064536) do
     t.integer  "progress"
     t.boolean  "done"
     t.date     "term"
-    t.date     "reminder"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "owner_type"
+    t.date     "reminder_date"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "owner_id"
+    t.string   "reminder_type"
+    t.integer  "reminder_duration"
+    t.string   "reminder_unit"
     t.index ["owner_id"], name: "index_dorsale_flyboy_tasks_on_owner_id", using: :btree
-    t.index ["owner_type"], name: "index_dorsale_flyboy_tasks_on_owner_type", using: :btree
     t.index ["taskable_id"], name: "index_dorsale_flyboy_tasks_on_taskable_id", using: :btree
     t.index ["taskable_type"], name: "index_dorsale_flyboy_tasks_on_taskable_type", using: :btree
   end

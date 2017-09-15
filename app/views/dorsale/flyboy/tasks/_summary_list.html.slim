@@ -11,8 +11,7 @@
       - tasks.each do |task|
         tr
           td.taskable
-            a href=engine_polymorphic_path(task.taskable)
-              = task.taskable
+            = link_to_object(task.taskable)
 
           td.name
             - if task.owner.nil?
@@ -20,7 +19,7 @@
             - else
               = icon(:user)
 
-            = link_to task, dorsale.flyboy_task_path(task)
+            = link_to_object(task)
 
           td.date
             .text-muted = date(task.term)

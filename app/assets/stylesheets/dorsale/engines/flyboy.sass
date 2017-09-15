@@ -9,21 +9,17 @@
     th
       text-align: left
 
-  .finished td
+  .finished td, .context-body.finished
     background: $state-success-bg !important
 
-  .onwarning td
+  .onwarning td, .context-body.onwarning
     background: $state-warning-bg !important
 
-  .onalert td
+  .onalert td, .context-body.onalert
     background: $state-danger-bg !important
 
   td.actions
     width: 5em
-
-  td.folder-status
-    width: 5em
-    white-space: nowrap
 
   td.task-status,
   td.task-snooze,
@@ -40,7 +36,6 @@
     overflow: hidden
 
   td.task-progress,
-  td.folder-progress,
   td.taskable-progress,
   td.task_comment-progress,
     width: 150px
@@ -53,10 +48,8 @@
       margin: 0
       padding: 0
 
-  td.folder-status,
   td.task-status,
   td.task-snooze,
-  td.folder-status a,
   td.task-status a,
   td.task-snooze a,
   td.task-term,
@@ -65,6 +58,26 @@
   td.task-term,
   th.task-term,
     text-align: right
+
+  .task_reminder_fields,
+  .task_term_fields,
+    display: flex
+
+    > div
+      margin-right: 15px
+
+    label
+      line-height: 2.5em
+
+    input, select
+      width: auto
+
+    input[id$=duration]
+      width: 5em
+
+    input#task_term_custom,
+    input#task_reminder_date,
+      width: 8em
 
   @media print
     #new_task_comment_tr

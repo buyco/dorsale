@@ -1,14 +1,18 @@
 class Dorsale::ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  include Dorsale::ActiveRecordUUIDConcern
-  include Dorsale::DefaultValuesConcern
-  nilify_blanks
+  include Agilibox::ActiveRecordUUIDConcern
+  include Agilibox::DefaultValuesConcern
+  include Agilibox::ModelToS
+  include Agilibox::ModelI18n
+  include Agilibox::PolymorphicId
+
+  nilify_blanks before: :validation
 
   def self.last_created
     reorder(:created_at, :id).last
   end
 end
 
-ActsAsTaggableOn::Tagging.send(:include, Dorsale::ActiveRecordUUIDConcern)
-ActsAsTaggableOn::Tag.send(:include, Dorsale::ActiveRecordUUIDConcern)
+ActsAsTaggableOn::Tagging.send(:include, Agilibox::ActiveRecordUUIDConcern)
+ActsAsTaggableOn::Tag.send(:include, Agilibox::ActiveRecordUUIDConcern)

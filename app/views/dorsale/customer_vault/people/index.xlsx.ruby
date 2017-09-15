@@ -7,6 +7,8 @@ fields = %w(
   email
   phone
   mobile
+  origin
+  activity_type
   fax
   skype
   www
@@ -46,4 +48,4 @@ data << fields.map { |field| model.t(field) }
   data << line
 end
 
-Dorsale::Serializers::XLSX.new(data).render_inline
+Agilibox::Serializers::XLSX.new(data).render_inline

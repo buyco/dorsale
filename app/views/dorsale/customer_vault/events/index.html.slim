@@ -1,0 +1,26 @@
+.customer_vault
+  - content_for :title
+    = icon(:comments)
+    = " "
+    = Dorsale::CustomerVault::Event.ts
+
+  - content_for :actions
+    = render "dorsale/customer_vault/people/index_actions"
+
+  - content_for :filters
+    = render "dorsale/customer_vault/events/filters"
+
+  - content_for :page_header
+    = render "dorsale/customer_vault/people/index_tabs"
+
+  - content_for :page_body
+    - if @events.empty?
+      p = t("messages.no_activity")
+
+    - else
+      = render "dorsale/customer_vault/events/list", events: @events
+
+  - content_for :pagination
+    = paginate @events
+
+  = render_dorsale_page

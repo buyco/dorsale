@@ -3,18 +3,18 @@
     thead
       tr
         th.task_comment-progress
-          = Dorsale::Flyboy::TaskComment.t(:progress)
+          = sortable_column Dorsale::Flyboy::TaskComment.t(:progress), :progress
 
         th.task_comment-description
-          = Dorsale::Flyboy::TaskComment.t(:description)
+          = sortable_column Dorsale::Flyboy::TaskComment.t(:description), :description
 
     tbody
-      - if policy(@task).update?
+      - if policy(@task).comment?
         tr#new_task_comment_tr
           td.task_comment-progress
             = f.input :progress, label: false
 
-          td.task_comment-description
+          td.task_comment-content
             = f.hidden_field :task_id
 
             .textarea-input-group
@@ -22,13 +22,17 @@
               input type="submit" value=t("actions.save")
 
 
-      - @task.reload.comments.map do |comment|
-        tr
+      - @task_comments.each do |comment|
+        tr.task_comment
           td.task_comment-progress
             = progress_bar percentage: comment.progress, label: true
 
-          td.task_comment-description
+          td.task_comment-content
             p: small
-              span.date = date(comment.date)
+              span.task_comment-date = date(comment.date)
+              = " "
+              = comment.t(:written_by)
+              = " "
+              span.task_comment-author = comment.author
 
-            p = text2html comment.description
+            p.task_comment-description = text2html comment.description
