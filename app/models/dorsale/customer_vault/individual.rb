@@ -11,7 +11,7 @@ class Dorsale::CustomerVault::Individual < Dorsale::CustomerVault::Person
   end
 
   def name
-    [self.last_name, self.first_name].join(", ")
+    [last_name, first_name].join(", ")
   end
 
   def activity_type

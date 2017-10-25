@@ -82,7 +82,7 @@ class Dorsale::BillingMachine::Quotation < ::Dorsale::ApplicationRecord
   private def total_including_taxes=(*); super; end
 
   def balance
-    self.total_including_taxes
+    total_including_taxes
   end
 
   def vat_rate
