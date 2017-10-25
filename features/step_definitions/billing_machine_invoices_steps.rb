@@ -54,7 +54,7 @@ Given(/^its due date is not yet passed$/) do
 end
 
 Given(/^its due date is the same day$/) do
-  @invoice.update!(due_date: (Time.zone.now.to_date))
+  @invoice.update!(due_date: Time.zone.now.to_date)
 end
 
 Given(/^its due date is yesterday$$/) do
