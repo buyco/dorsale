@@ -321,7 +321,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
 
       vat_rate = number(main_document.vat_rate)
       table_totals.push [
-        "#{main_document.t(:vat).mb_chars.upcase.to_s} #{percentage vat_rate}",
+        "#{main_document.t(:vat).mb_chars.upcase} #{percentage vat_rate}",
         bm_currency(main_document.vat_amount),
       ]
 
