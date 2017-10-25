@@ -217,7 +217,7 @@ Then(/^it's added to the invoice list$/) do
 end
 
 Then(/^the commercial discount is "(.*?)"€$/) do |discount|
-   expect( find(".commercial_discount input").value).to eq discount
+  expect( find(".commercial_discount input").value).to eq discount
 end
 
 Then(/^the invoices's label has changed$/) do

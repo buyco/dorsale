@@ -60,28 +60,28 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
     end
 
     it "should be late if a bit late" do
-        invoice = create(:billing_machine_invoice, due_date: Time.zone.now.to_date-1, date: Time.zone.now.to_date-1, paid: false)
-        expect(invoice.payment_status).to eq(:late)
+      invoice = create(:billing_machine_invoice, due_date: Time.zone.now.to_date-1, date: Time.zone.now.to_date-1, paid: false)
+      expect(invoice.payment_status).to eq(:late)
     end
 
     it "should be on_alert if a too late" do
-        invoice = create(:billing_machine_invoice, due_date: Time.zone.now.to_date-16, date: Time.zone.now.to_date-16, paid: false)
-        expect(invoice.payment_status).to eq(:on_alert)
+      invoice = create(:billing_machine_invoice, due_date: Time.zone.now.to_date-16, date: Time.zone.now.to_date-16, paid: false)
+      expect(invoice.payment_status).to eq(:on_alert)
     end
 
     it "should be paid if paid" do
-        invoice = create(:billing_machine_invoice, due_date: Time.zone.now.to_date-16, date: Time.zone.now.to_date-16, paid: true)
-        expect(invoice.payment_status).to eq(:paid)
+      invoice = create(:billing_machine_invoice, due_date: Time.zone.now.to_date-16, date: Time.zone.now.to_date-16, paid: true)
+      expect(invoice.payment_status).to eq(:paid)
     end
 
     it "should be on_alert if no due date is defined" do
-        invoice = create(:billing_machine_invoice, due_date: nil, date: Time.zone.now.to_date, paid: false)
-        expect(invoice.payment_status).to eq(:on_alert)
+      invoice = create(:billing_machine_invoice, due_date: nil, date: Time.zone.now.to_date, paid: false)
+      expect(invoice.payment_status).to eq(:on_alert)
     end
 
     it "should be on_alert if no due date is defined" do
-        invoice = create(:billing_machine_invoice, due_date: nil, date: Time.zone.now.to_date, paid: true)
-        expect(invoice.payment_status).to eq(:paid)
+      invoice = create(:billing_machine_invoice, due_date: nil, date: Time.zone.now.to_date, paid: true)
+      expect(invoice.payment_status).to eq(:paid)
     end
 
     it "should work fine upon creation" do
