@@ -129,5 +129,4 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
       end
     end
   end
-
 end

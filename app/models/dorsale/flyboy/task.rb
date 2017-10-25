@@ -123,5 +123,4 @@ class Dorsale::Flyboy::Task < ::Dorsale::ApplicationRecord
       errors.add(:reminder_date, :less_than, count: term)
     end
   end
-
 end

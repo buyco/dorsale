@@ -211,5 +211,4 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
   def task_params
     params.fetch(:task, {}).permit(permitted_params)
   end
-
 end

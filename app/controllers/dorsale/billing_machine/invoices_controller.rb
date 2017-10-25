@@ -190,5 +190,4 @@ class Dorsale::BillingMachine::InvoicesController < ::Dorsale::BillingMachine::A
   def invoice_params_for_update
     invoice_params
   end
-
 end

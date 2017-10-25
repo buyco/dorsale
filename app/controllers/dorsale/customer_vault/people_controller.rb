@@ -208,5 +208,4 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
       :text   => ::Dorsale::CustomerVault::Event.t("text.#{action}"),
     )
   end
-
 end

@@ -73,5 +73,4 @@ class Dorsale::ExpenseGun::Expense < ::Dorsale::ApplicationRecord
   def may_edit?
     current_state == :draft
   end
-
 end

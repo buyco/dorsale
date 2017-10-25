@@ -23,5 +23,4 @@ class Dorsale::ExpenseGun::ExpenseLine < ::Dorsale::ApplicationRecord
   def total_vat_deductible
     category.vat_deductible == true ? (vat * company_part / 100) : 0.0
   end
-
 end

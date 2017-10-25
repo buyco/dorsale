@@ -78,5 +78,4 @@ module Dorsale::Flyboy::ApplicationHelper
       [Dorsale::Flyboy::Task.t("term_value.custom"),    :custom,        {selected: is_custom}],
     ]
   end
-
 end

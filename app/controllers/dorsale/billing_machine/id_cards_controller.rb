@@ -102,5 +102,4 @@ class Dorsale::BillingMachine::IdCardsController < ::Dorsale::BillingMachine::Ap
   def id_card_params_for_update
     id_card_params
   end
-
 end

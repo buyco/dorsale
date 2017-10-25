@@ -138,5 +138,4 @@ class Dorsale::Alexandrie::AttachmentsController < ::Dorsale::ApplicationControl
   def notify_attachable
     @attachment.attachable.send(:try, :after_attachments_changes)
   end
-
 end

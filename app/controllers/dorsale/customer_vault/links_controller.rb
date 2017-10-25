@@ -104,5 +104,4 @@ class Dorsale::CustomerVault::LinksController < ::Dorsale::CustomerVault::Applic
   def link_params_for_update
     link_params
   end
-
 end

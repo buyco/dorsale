@@ -27,5 +27,4 @@ class Dorsale::BillingMachine::QuotationLine < ::Dorsale::ApplicationRecord
   def update_quotation_total
     quotation.reload.save!
   end
-
 end

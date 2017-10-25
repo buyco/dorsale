@@ -28,6 +28,5 @@ module Dorsale::BillingMachine
     def default_currency
       @default_currency ||= "€"
     end
-
   end
 end

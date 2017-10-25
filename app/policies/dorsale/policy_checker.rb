@@ -73,5 +73,4 @@ class Dorsale::PolicyChecker
       end
     end
   end
-
 end
