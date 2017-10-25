@@ -2,11 +2,12 @@ puts "Stating data seed"
 
 require "database_cleaner"
 
-DatabaseCleaner.clean_with(:truncation, {except: %w(
+tables = %w(
   ar_internal_metadata
   schema_migrations
   spatial_ref_sys
-)})
+)
+DatabaseCleaner.clean_with(:truncation, except: tables)
 
 user = User.create!(email: "demo@agilidee.com", password: "password")
 
