@@ -15,4 +15,3 @@ class Dorsale::CustomerVault::PersonData
     instance_methods - Dorsale::CustomerVault::PersonData.instance_methods
   end
 end
-

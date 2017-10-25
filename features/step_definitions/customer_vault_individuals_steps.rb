@@ -65,4 +65,3 @@ end
 When(/^I go on this individual$/) do
   visit dorsale.customer_vault_individual_path(@individual)
 end
-

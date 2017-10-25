@@ -17,4 +17,3 @@ When(/^he fills a multiple vat line with "(.*?)", "(.*?)", "(.*?)", "(.*?)", "(.
     find(".line-unit_price input").set unit_price
   end
 end
-

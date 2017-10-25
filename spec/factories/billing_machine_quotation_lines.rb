@@ -8,4 +8,3 @@ FactoryGirl.define do
     unit_price { 20 }
   end
 end
-

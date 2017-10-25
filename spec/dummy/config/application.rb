@@ -27,4 +27,3 @@ module Dummy
     config.action_mailer.delivery_method = :sendmail
   end
 end
-

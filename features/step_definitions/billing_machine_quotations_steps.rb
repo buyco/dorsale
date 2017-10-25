@@ -241,4 +241,3 @@ Then(/^only the "(.*?)" quotations appear$/) do |state|
   expect(page).to have_selector("tr.quotation", count: 1)
   expect(find("tr.quotation")).to have_content(state_i18n)
 end
-

@@ -56,6 +56,3 @@ describe ::Dorsale::BillingMachine::QuotationSingleVatPdf, pdfs: true do
     end
   end # describe "attachments"
 end
-
-
-
