@@ -24,7 +24,7 @@ class Dorsale::BillingMachine::Quotation < ::Dorsale::ApplicationRecord
 
   validates :id_card, presence: true
   validates :date,    presence: true
-  validates :state,   presence: true, inclusion: {in: proc { STATES } }
+  validates :state,   presence: true, inclusion: {in: proc { STATES }}
 
   default_scope -> {
     order(unique_index: :desc)
