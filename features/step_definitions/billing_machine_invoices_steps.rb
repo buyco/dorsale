@@ -67,12 +67,7 @@ end
 
 Given(/^existing "(.*?)" invoices with "(.*?)" amount$/) do |n, amount|
   n.to_i.times do
-    create(:billing_machine_invoice_line,
-      invoice: invoice,
-      quantity: 1,
-      unit_price: amount,
-      total: nil,
-    )
+    create(:billing_machine_invoice_line, quantity: 1, unit_price: amount)
   end
 end
 
