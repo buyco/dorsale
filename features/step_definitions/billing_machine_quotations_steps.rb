@@ -70,8 +70,7 @@ end
 
 Given(/^existing "(.*?)" quotations with "(.*?)" amount$/) do |n, amount|
   n.to_i.times do
-    quotation = create(:billing_machine_quotation)
-    quotation_line = create(:billing_machine_quotation_line,
+    create(:billing_machine_quotation_line,
       quotation: quotation,
       quantity: 1,
       unit_price: amount,

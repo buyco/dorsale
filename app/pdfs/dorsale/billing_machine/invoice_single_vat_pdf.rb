@@ -460,7 +460,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
     infos_text << "#{main_document.t(:registration)} : #{@id_card.registration_city} #{@id_card.registration_number}" if @id_card.registration_number.present?
     infos_text << "#{main_document.t(:siret)} : #{@id_card.siret}"                                                    if @id_card.siret.present?
     infos_text << "#{main_document.t(:intracommunity_vat)} : #{@id_card.intracommunity_vat}"                          if @id_card.intracommunity_vat.present?
-    infos_text = infos_text.join(" - ")
+    infos_text.join(" - ")
   end
 
   def build_footer_bottom
@@ -481,7 +481,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
     top    = bounds.bottom + height
     width  = bounds.width
 
-    bounding_box [0, top], height: height, width: bounds.width do
+    bounding_box [0, top], height: height, width: width do
       float do
         number_pages "page <page>/<total>", align: :right, size: 9
       end
