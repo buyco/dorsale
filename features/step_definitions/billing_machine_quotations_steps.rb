@@ -16,9 +16,10 @@ Given(/^an existing quotation with a "(.*?)"% VAT rate$/) do |rate|
   create(:billing_machine_quotation_line, vat_rate: rate, quotation: @quotation)
 end
 
-Given(/^(\d+) associated documents to this quotation$/) do |arg1|
-  @document1 = create(:alexandrie_attachment, attachable: @quotation)
-  @document2 = create(:alexandrie_attachment, attachable: @quotation)
+Given(/^(\d+) associated documents to this quotation$/) do |n|
+  n.to_i.times do |i|
+    instance_variable_set "@document#{i}", create(:alexandrie_attachment, attachable: @quotation)
+  end
 end
 
 Given(/^a bunch of existing quotations$/) do

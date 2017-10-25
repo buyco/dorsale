@@ -13,7 +13,7 @@ end
 World(CucumberWaitTurbolinksRequests)
 
 # Auto wait turbolinks requests between steps
-AfterStep do |scenario|
+AfterStep do |_scenario|
   if page.evaluate_script("typeof Turbolinks") != "undefined"
     evaluate_script %(
       $(document).on("turbolinks:before-visit", function(){

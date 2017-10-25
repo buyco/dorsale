@@ -76,7 +76,7 @@ Given(/^existing "(.*?)" invoices with "(.*?)" amount$/) do |n, amount|
   end
 end
 
-When(/^(the user|he) goes to the invoices page$/) do |arg1|
+When(/^(?:the user|he) goes to the invoices page$/) do
   visit dorsale.billing_machine_invoices_path
 end
 
