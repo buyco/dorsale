@@ -42,12 +42,14 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
 
 
       main_document.lines.each do |line|
-        table_products.push [line.label,
-            number(line.quantity).gsub(",00","").gsub(".00",""),
-            line.unit,
-            percentage(line.vat_rate),
-            bm_currency(line.unit_price),
-            bm_currency(line.total)]
+        table_products.push [
+          line.label,
+          number(line.quantity).gsub(",00","").gsub(".00",""),
+          line.unit,
+          percentage(line.vat_rate),
+          bm_currency(line.unit_price),
+          bm_currency(line.total)
+        ]
       end
 
     table table_products,
@@ -55,7 +57,7 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
       :header => true,
       :cell_style    => {border_width: 0} do
         row(0).font_style = :bold
-        row(0).border_width = 1,
+        row(0).border_width = 1
         cells.style do |c|
           c.align = c.column == 0 ? :left : :right
         end
