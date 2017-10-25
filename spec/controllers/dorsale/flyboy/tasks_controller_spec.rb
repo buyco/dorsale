@@ -11,10 +11,12 @@ describe Dorsale::Flyboy::TasksController, type: :controller do
     create(:flyboy_task, done: false)
   }
 
-  let(:valid_attributes) { {
-    :name => "New Task",
-    :term => Time.zone.now.to_date,
-  }}
+  let(:valid_attributes) {
+    {
+      :name => "New Task",
+      :term => Time.zone.now.to_date,
+    }
+  }
 
   describe "#complete" do
     before(:each) do
