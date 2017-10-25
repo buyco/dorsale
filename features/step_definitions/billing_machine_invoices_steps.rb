@@ -217,7 +217,7 @@ Then(/^it's added to the invoice list$/) do
 end
 
 Then(/^the commercial discount is "(.*?)"€$/) do |discount|
-  expect( find(".commercial_discount input").value).to eq discount
+  expect(find(".commercial_discount input").value).to eq discount
 end
 
 Then(/^the invoices's label has changed$/) do
@@ -226,12 +226,12 @@ Then(/^the invoices's label has changed$/) do
 end
 
 Then(/^the VAT rate is "(.*?)"$/) do |rate|
-  expect( find(".vat_rate input").value).to eq rate
+  expect(find(".vat_rate input").value).to eq rate
 end
 
 Then(/^the new line total is "(.*?)"$/) do |value|
   within all(".line").last do
-    expect( find(".line-total input").value).to eq value
+    expect(find(".line-total input").value).to eq value
   end
 end
 
@@ -268,11 +268,11 @@ Then(/^a message signals that the invoice is set to paid$/) do
 end
 
 Then(/^the advance is "(.*?)"€$/) do |advance|
-  expect( find(".advance input").value).to eq advance
+  expect(find(".advance input").value).to eq advance
 end
 
 Then(/^the balance is "(.*?)"$/) do |balance|
-  expect( find(".balance input").value).to eq balance
+  expect(find(".balance input").value).to eq balance
 end
 
 Then(/^the invoice line shows the right date$/) do
