@@ -119,7 +119,7 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
   def t(*args)
     return super if args.any?
 
-    if balance && balance.negative?
+    if balance&.negative?
       super(:credit_note)
     else
       self.class.t
