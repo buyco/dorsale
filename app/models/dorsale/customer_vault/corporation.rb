@@ -17,13 +17,13 @@ class Dorsale::CustomerVault::Corporation < Dorsale::CustomerVault::Person
     self.corporation_name = corporation_name
   end
 
-  private def first_name;  raise NoMethodError; end
-  private def first_name=; raise NoMethodError; end
-  private def last_name;   raise NoMethodError; end
-  private def last_name=;  raise NoMethodError; end
-  private def corporation;   raise NoMethodError; end
-  private def corporation=;  raise NoMethodError; end
-  private def corporation_id;   raise NoMethodError; end
-  private def corporation_id=;  raise NoMethodError; end
-
+  # rubocop:disable Style/SingleLineMethods
+  private def first_name;      raise NoMethodError; end
+  private def first_name=;     raise NoMethodError; end
+  private def last_name;       raise NoMethodError; end
+  private def last_name=;      raise NoMethodError; end
+  private def corporation;     raise NoMethodError; end
+  private def corporation=;    raise NoMethodError; end
+  private def corporation_id;  raise NoMethodError; end
+  private def corporation_id=; raise NoMethodError; end
 end

@@ -76,14 +76,10 @@ class Dorsale::BillingMachine::Quotation < ::Dorsale::ApplicationRecord
     self.total_including_taxes = total_excluding_taxes + vat_amount
   end
 
-  def total_excluding_taxes=(*); super; end
-  private :total_excluding_taxes=
-
-  def vat_amount=(*); super; end
-  private :vat_amount=
-
-  def total_including_taxes=(*); super; end
-  private :total_including_taxes=
+  # rubocop:disable Style/SingleLineMethods
+  private def total_excluding_taxes=(*); super; end
+  private def vat_amount=(*);            super; end
+  private def total_including_taxes=(*); super; end
 
   def balance
     self.total_including_taxes

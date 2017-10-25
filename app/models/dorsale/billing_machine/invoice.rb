@@ -128,16 +128,9 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
     end
   end
 
-  def total_excluding_taxes=(*); super; end
-  private :total_excluding_taxes=
-
-  def vat_amount=(*); super; end
-  private :vat_amount=
-
-  def total_including_taxes=(*); super; end
-  private :total_including_taxes=
-
-  def balance=(*); super; end
-  private :balance=
-
+  # rubocop:disable Style/SingleLineMethods
+  private def total_excluding_taxes=(*); super; end
+  private def vat_amount=(*);            super; end
+  private def total_including_taxes=(*); super; end
+  private def balance=(*);               super; end
 end

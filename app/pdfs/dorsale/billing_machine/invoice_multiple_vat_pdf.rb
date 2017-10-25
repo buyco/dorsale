@@ -1,9 +1,11 @@
 class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine::InvoiceSingleVatPdf
+  # rubocop:disable Style/SingleLineMethods, Layout/EmptyLineBetweenDefs
   def first_column_width;  64.mm; end
   def second_column_width; 22.mm; end
   def third_column_width;  20.mm; end
   def fourth_column_width; 20.mm; end
   def fifth_column_width;  29.mm; end
+
   def last_column_width
     bounds.width - first_column_width - second_column_width - third_column_width - fourth_column_width - fifth_column_width
   end

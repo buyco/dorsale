@@ -38,21 +38,20 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
     @id_card       = main_document.id_card
   end
 
-  def header_height;         90.mm; end
-  def logo_height;           32.mm; end
-  def logo_width;            50.mm; end
+  # rubocop:disable Style/SingleLineMethods, Layout/EmptyLineBetweenDefs
+  def header_height;         90.mm;  end
+  def logo_height;           32.mm;  end
+  def logo_width;            50.mm;  end
+  def footer_height;         40.mm;  end
+  def footer_top_height;     15.mm;  end
+  def footer_bottom_height;  15.mm;  end
+  def middle_height;         14.cm;  end
+  def products_table_height; 90.mm;  end
+  def first_column_width;    7.6.cm; end
+  def second_column_width;   2.4.cm; end
+  def third_column_width;    2.5.cm; end
+  def fourth_column_width;   2.9.cm; end
 
-  def footer_height;         40.mm; end
-  def footer_top_height;     15.mm; end
-  def footer_bottom_height;  15.mm; end
-
-  def middle_height;         14.cm; end
-  def products_table_height; 90.mm; end
-
-  def first_column_width;  7.6.cm; end
-  def second_column_width; 2.4.cm; end
-  def third_column_width;  2.5.cm; end
-  def fourth_column_width; 2.9.cm; end
   def last_column_width
     bounds.width - first_column_width - second_column_width - third_column_width - fourth_column_width
   end
