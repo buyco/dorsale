@@ -113,8 +113,8 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
       end
 
       table table_totals,
-        :column_widths => [fifth_column_width , last_column_width],
-        :cell_style    => {border_width: [0, 1, 0 , 0]},
+        :column_widths => [fifth_column_width, last_column_width],
+        :cell_style    => {border_width: [0, 1, 0, 0]},
         :position      => :right do
           row(-1).style font_style: :bold
           column(0).padding_right = 0.2.cm

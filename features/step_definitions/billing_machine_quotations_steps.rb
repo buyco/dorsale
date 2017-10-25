@@ -88,11 +88,11 @@ When(/^the user goes to the quotations page$/) do
 end
 
 When(/^the quotation line shows the right date$/) do
-  page.should have_selector ".date" , text: I18n.l(@quotation.date)
+  page.should have_selector ".date", text: I18n.l(@quotation.date)
 end
 
 When(/^the quotation line shows the right traking\-id$/) do
-  page.should have_selector ".tracking_id" , text: @quotation.tracking_id
+  page.should have_selector ".tracking_id", text: @quotation.tracking_id
 end
 
 When(/^the quotation line shows the right customer's name$/) do
@@ -100,11 +100,11 @@ When(/^the quotation line shows the right customer's name$/) do
 end
 
 When(/^the quotation line shows the right total excluding taxes value$/) do
-  page.should have_selector ".total_excluding_taxes" , text: "9,99 €"
+  page.should have_selector ".total_excluding_taxes", text: "9,99 €"
 end
 
 When(/^the quotation line shows the right total including taxes value$/) do
-  page.should have_selector ".total_including_taxes" , text: "11,99 €"
+  page.should have_selector ".total_including_taxes", text: "11,99 €"
 end
 
 When(/^the user goes to the quotation details$/) do

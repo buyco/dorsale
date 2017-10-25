@@ -12,7 +12,7 @@ describe Dorsale::Flyboy::TasksController, type: :controller do
   }
 
   let(:valid_attributes) { {
-    :name => "New Task" ,
+    :name => "New Task",
     :term => Time.zone.now.to_date,
   }}
 
