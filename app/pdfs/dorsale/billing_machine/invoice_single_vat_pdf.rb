@@ -453,8 +453,8 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
     infos_text << @id_card.entity_name                                                                                if @id_card.entity_name.present?
     infos_text << "#{main_document.t(:info_phone)} : #{@id_card.contact_phone}"                                       if @id_card.contact_phone.present?
     infos_text << "#{main_document.t(:info_fax)} : #{@id_card.contact_fax}"                                           if @id_card.contact_fax.present?
-    infos_text << "#{@id_card.contact_email}"                                                                         if @id_card.contact_email.present?
-    infos_text << "#{@id_card.legal_form.to_s}"                                                                       if @id_card.legal_form.present?
+    infos_text << @id_card.contact_email.to_s                                                                         if @id_card.contact_email.present?
+    infos_text << @id_card.legal_form.to_s                                                                            if @id_card.legal_form.present?
     infos_text << "#{main_document.t(:capital)} : #{bm_currency @id_card.capital}"                                    if @id_card.capital.present?
     infos_text << "#{main_document.t(:registration)} : #{@id_card.registration_city} #{@id_card.registration_number}" if @id_card.registration_number.present?
     infos_text << "#{main_document.t(:siret)} : #{@id_card.siret}"                                                    if @id_card.siret.present?
