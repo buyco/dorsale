@@ -120,7 +120,7 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
       line1   = create(:billing_machine_invoice_line, invoice: invoice, vat_rate: 10)
 
       expect {
-        line2   = create(:billing_machine_invoice_line, invoice: invoice, vat_rate: 15)
+        line2 = create(:billing_machine_invoice_line, invoice: invoice, vat_rate: 15)
       }.to raise_error(RuntimeError)
     end
 

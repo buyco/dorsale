@@ -80,17 +80,17 @@ describe ::Dorsale::BillingMachine::Quotation do
 
     it "it should be first line vat rate" do
       quotation = create(:billing_machine_quotation)
-      line1   = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 10)
-      line2   = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 10)
+      line1 = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 10)
+      line2 = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 10)
       expect(quotation.vat_rate).to eq 10
     end
 
     it "it should raise if multiple vat_rates" do
       quotation = create(:billing_machine_quotation)
-      line1   = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 10)
+      line1     = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 10)
 
       expect {
-        line2   = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 15)
+        line2 = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 15)
       }.to raise_error(RuntimeError)
     end
 

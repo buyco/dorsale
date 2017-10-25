@@ -347,7 +347,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
         :column_widths => [fourth_column_width, last_column_width],
         :cell_style    => {border_width: [0, 1, 0 , 0]},
         :position      => :right do
-          row(-1).style :font_style       => :bold
+          row(-1).style font_style: :bold
           column(0).padding_right = 0.2.cm
           row(-1).borders = [:top, :right]
           row(-1).border_width = 1
@@ -456,7 +456,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
     infos_text << "#{main_document.t(:info_fax)} : #{@id_card.contact_fax}"                                           if @id_card.contact_fax.present?
     infos_text << "#{@id_card.contact_email}"                                                                         if @id_card.contact_email.present?
     infos_text << "#{@id_card.legal_form.to_s}"                                                                       if @id_card.legal_form.present?
-    infos_text << "#{main_document.t(:capital)} : #{bm_currency @id_card.capital}"                                          if @id_card.capital.present?
+    infos_text << "#{main_document.t(:capital)} : #{bm_currency @id_card.capital}"                                    if @id_card.capital.present?
     infos_text << "#{main_document.t(:registration)} : #{@id_card.registration_city} #{@id_card.registration_number}" if @id_card.registration_number.present?
     infos_text << "#{main_document.t(:siret)} : #{@id_card.siret}"                                                    if @id_card.siret.present?
     infos_text << "#{main_document.t(:intracommunity_vat)} : #{@id_card.intracommunity_vat}"                          if @id_card.intracommunity_vat.present?

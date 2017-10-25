@@ -11,8 +11,8 @@ end
 When(/^he fills a multiple vat line with "(.*?)", "(.*?)", "(.*?)", "(.*?)", "(.*?)"$/) do |label, quantity, unit, vat_rate, unit_price|
   within all(".line").last do
     find(".line-label textarea").set label
-    find(".line-quantity input").set  quantity
-    find(".line-unit input").set  unit
+    find(".line-quantity input").set quantity
+    find(".line-unit input").set unit
     find(".line-vat_rate input").set vat_rate
     find(".line-unit_price input").set unit_price
   end

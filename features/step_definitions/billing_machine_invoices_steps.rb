@@ -108,8 +108,8 @@ When(/^he fills a line with "(.*?)", "(.*?)", "(.*?)", "(.*?)"$/) do |label, qua
 
   within all(".line").last do
     find(".line-label textarea").set label
-    find(".line-quantity input").set  quantity
-    find(".line-unit input").set  unit
+    find(".line-quantity input").set quantity
+    find(".line-unit input").set unit
     find(".line-unit_price input").set unit_price
   end
 end

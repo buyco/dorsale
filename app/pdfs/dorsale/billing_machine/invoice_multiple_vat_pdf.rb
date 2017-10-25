@@ -20,10 +20,10 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
           colomn_widths = [first_column_width, second_column_width, third_column_width, fourth_column_width, fifth_column_width, last_column_width]
           cell_style    = {height: products_table_height}
           table(data, column_widths: colomn_widths, cell_style: cell_style) do
-            row(0).style       :text_color => BLACK
-            row(0).style       :font_style => :bold
-            column(0).style    :align      => :left
-            column(1..4).style :align      => :right
+            row(0).style       text_color: BLACK
+            row(0).style       font_style: :bold
+            column(0).style    align:      :left
+            column(1..4).style align:      :right
           end # table
         end # flat
       end # repeat
@@ -115,7 +115,7 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
         :column_widths => [fifth_column_width , last_column_width],
         :cell_style    => {border_width: [0, 1, 0 , 0]},
         :position      => :right do
-          row(-1).style :font_style       => :bold
+          row(-1).style font_style: :bold
           column(0).padding_right = 0.2.cm
           row(-1).borders = [:top, :right]
           row(-1).border_width = 1
