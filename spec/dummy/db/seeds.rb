@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 puts "Stating data seed"
 
 require "database_cleaner"
