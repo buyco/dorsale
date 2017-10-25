@@ -112,7 +112,7 @@ class Dorsale::Flyboy::Task < ::Dorsale::ApplicationRecord
     end
 
     if reminder_type == "duration" && term && reminder_duration && reminder_unit.in?(REMINDER_UNITS)
-      self.reminder_date = term - eval("#{reminder_duration}.#{reminder_unit}")
+      self.reminder_date = term - reminder_duration.public_send(reminder_unit)
     end
 
     true
