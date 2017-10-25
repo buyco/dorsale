@@ -101,9 +101,7 @@ class Dorsale::BillingMachine::Quotation < ::Dorsale::ApplicationRecord
     vat_rates.first || ::Dorsale::BillingMachine::DEFAULT_VAT_RATE
   end
 
-  def vat_rate=(value)
-    @vat_rate = value
-  end
+  attr_writer :vat_rate
 
   before_validation :apply_vat_rate_to_lines
 
