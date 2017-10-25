@@ -33,6 +33,6 @@ module Dorsale::Flyboy::TaskPolicyHelper
     return false unless task.is_a?(::Dorsale::Flyboy::Task)
     return false unless task.taskable.present?
 
-    ! policy(task.taskable).read?
+    !policy(task.taskable).read?
   end
 end
