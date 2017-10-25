@@ -66,15 +66,15 @@ RSpec.describe ::Dorsale::CustomerVault::PeopleController, type: :controller do
         expect(assigns(:people)).to eq [individual1]
       end
 
-      it "should filter by person activity" do
-        activity    = create(:customer_vault_activity)
-        individual1 = create(:customer_vault_individual, activity: activity)
-        individual2 = create(:customer_vault_individual)
+      it "should filter by person activity_type" do
+        activity_type = create(:customer_vault_activity_type)
+        corporation1  = create(:customer_vault_corporation, activity_type: activity_type)
+        corporation2  = create(:customer_vault_corporation)
 
-        cookies[:filters] = {person_activity: activity.id}.to_json
+        cookies[:filters] = {person_activity: activity_type.id}.to_json
         get :index
 
-        expect(assigns(:people)).to eq [individual1]
+        expect(assigns(:people)).to eq [corporation1]
       end
     end # describe "filters"
 
