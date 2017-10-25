@@ -3,15 +3,15 @@ class Dorsale::BillingMachine::SmallData::FilterStrategyByPaymentStatus < ::Agil
     table_name = query.model.table_name
 
     if value == "paid"
-      return query.where("#{table_name}.paid = ?", true)
+      query.where("#{table_name}.paid = ?", true)
     elsif value == "unpaid"
-      return query.where("#{table_name}.paid = ?", false)
+      query.where("#{table_name}.paid = ?", false)
     elsif value == "pending"
-      return query.where("#{table_name}.paid = ? and #{table_name}.due_date >= ?", false, Time.zone.now.to_date)
+      query.where("#{table_name}.paid = ? and #{table_name}.due_date >= ?", false, Time.zone.now.to_date)
     elsif value == "late"
-      return query.where("#{table_name}.paid = ? and (#{table_name}.due_date < ? or #{table_name}.due_date is null)", false, Time.zone.now.to_date)
+      query.where("#{table_name}.paid = ? and (#{table_name}.due_date < ? or #{table_name}.due_date is null)", false, Time.zone.now.to_date)
     else
-      return query
+      query
     end
   end
 end

@@ -27,9 +27,9 @@ module Dorsale::BillingMachine::ApplicationHelper
 
   def quotation_state_classes(quotation)
     if quotation.state == "pending" && quotation.date < 1.month.ago
-      return "pending late"
+      "pending late"
     else
-      return quotation.state
+      quotation.state
     end
   end
 

@@ -104,15 +104,15 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
 
   def payment_status
     if paid?
-      return :paid
+      :paid
     elsif due_date.nil?
-      return :on_alert
+      :on_alert
     elsif Time.zone.now.to_date >= due_date + 15
-      return :on_alert
+      :on_alert
     elsif Time.zone.now.to_date > due_date
-      return :late
+      :late
     else
-      return :pending
+      :pending
     end
   end
 
