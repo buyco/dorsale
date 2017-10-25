@@ -52,8 +52,8 @@ corporation2 = Dorsale::CustomerVault::Corporation.create!(
 )
 
 corporation2.comments.create!(
-  :text => "Je viens d'avoir cette boite au téléphone, il faut leur faire un devis.",
-  author: user,
+  :text   => "Je viens d'avoir cette boite au téléphone, il faut leur faire un devis.",
+  :author => user,
 )
 
 Dorsale::BillingMachine::Quotation.create!(
