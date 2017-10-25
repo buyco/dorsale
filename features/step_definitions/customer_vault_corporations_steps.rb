@@ -210,7 +210,7 @@ When(/^I delete this corporation$/) do
 end
 
 Then(/^the corporation is deleted$/) do
-  expect(::Dorsale::CustomerVault::Corporation.count).to eq (@corporations_count - 1)
+  expect(::Dorsale::CustomerVault::Corporation.count).to eq(@corporations_count - 1)
 end
 
 Then(/^I am on the people page$/) do
