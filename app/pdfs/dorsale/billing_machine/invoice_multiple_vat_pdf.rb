@@ -43,7 +43,6 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
         main_document.t(:line_total).mb_chars.upcase.to_s,
       ]]
 
-
       main_document.lines.each do |line|
         table_products.push [
           line.label,

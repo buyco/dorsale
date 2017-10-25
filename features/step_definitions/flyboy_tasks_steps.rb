@@ -163,7 +163,6 @@ Then(/^only undone tasks appear$/) do
   expect(page).to have_content @undone_task.name
 end
 
-
 Then(/^all tasks appear$/) do
   expect(page).to have_content @done_task.name
   expect(page).to have_content @undone_task.name
