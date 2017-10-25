@@ -105,13 +105,13 @@ class Dorsale::BillingMachine::InvoicesController < ::Dorsale::BillingMachine::A
 
     @subject = begin
       params[:email][:subject]
-    rescue
+    rescue StandardError
       "#{model.t} #{@invoice.tracking_id} : #{@invoice.label}"
     end
 
     @body = begin
       params[:email][:body]
-    rescue
+    rescue StandardError
       t("emails.invoices.send_invoice_to_customer",
         :from => current_user.to_s,
         :to   => @invoice.customer.to_s,
