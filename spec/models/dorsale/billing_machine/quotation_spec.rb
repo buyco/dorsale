@@ -116,7 +116,7 @@ describe ::Dorsale::BillingMachine::Quotation do
         :vat_rate   => 20,
         :quantity   => 10,
         :unit_price => 5,
-        :quotation  => quotation
+        :quotation  => quotation,
       )
 
       expect(quotation.total_excluding_taxes).to eq(90.0)

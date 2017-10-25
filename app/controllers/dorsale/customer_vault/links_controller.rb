@@ -97,7 +97,7 @@ class Dorsale::CustomerVault::LinksController < ::Dorsale::CustomerVault::Applic
   def link_params_for_create
     link_params.merge(
       :alice  => @person,
-      :bob_id => params.dig(:link, :bob_id)
+      :bob_id => params.dig(:link, :bob_id),
     )
   end
 

@@ -71,7 +71,7 @@ Given(/^existing "(.*?)" invoices with "(.*?)" amount$/) do |n, amount|
       invoice: invoice,
       quantity: 1,
       unit_price: amount,
-      total: nil
+      total: nil,
     )
   end
 end

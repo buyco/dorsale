@@ -123,7 +123,7 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
       :progress    => 100,
       :description => t("messages.tasks.complete_ok"),
       :date        => Time.zone.now,
-      :author      => current_user
+      :author      => current_user,
     )
 
     if @task_comment.save

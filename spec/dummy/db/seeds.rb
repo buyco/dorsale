@@ -25,7 +25,7 @@ corporation1 = Dorsale::CustomerVault::Corporation.create!(
   :address_attributes => {
     :city    => "Marseille",
     :country => "France",
-  }
+  },
 )
 
 Dorsale::BillingMachine::Invoice.create!(
@@ -39,7 +39,7 @@ Dorsale::BillingMachine::Invoice.create!(
       :quantity   => 3.2,
       :unit_price => 14,
    },
-  ]
+  ],
 )
 
 corporation2 = Dorsale::CustomerVault::Corporation.create!(
@@ -50,12 +50,12 @@ corporation2 = Dorsale::CustomerVault::Corporation.create!(
   :address_attributes => {
     :city    => "Marseille",
     :country => "France",
-  }
+  },
 )
 
 corporation2.comments.create!(
   :text => "Je viens d'avoir cette boite au téléphone, il faut leur faire un devis.",
-  author: user
+  author: user,
 )
 
 Dorsale::BillingMachine::Quotation.create!(
@@ -74,7 +74,7 @@ Dorsale::BillingMachine::Quotation.create!(
         :quantity   => 5,
         :unit_price => 1200,
     },
-  ]
+  ],
 )
 
 individual1 = Dorsale::CustomerVault::Individual.create!(
@@ -86,7 +86,7 @@ individual1 = Dorsale::CustomerVault::Individual.create!(
   :address_attributes => {
     :city    => "Marseille",
     :country => "France",
-  }
+  },
 )
 
 individual2 = Dorsale::CustomerVault::Individual.create!(
@@ -98,7 +98,7 @@ individual2 = Dorsale::CustomerVault::Individual.create!(
   :address_attributes => {
     :city    => "Marseille",
     :country => "France",
-  }
+  },
 )
 
 individual2.comments.create!(
@@ -108,7 +108,7 @@ individual2.comments.create!(
 
 task1 = Dorsale::Flyboy::Task.create!(
   :name        => "Traduction",
-  :description => "Traduire en français et en anglais"
+  :description => "Traduire en français et en anglais",
 )
 
 task1.comments.create!(
@@ -119,12 +119,12 @@ task1.comments.create!(
 
 task2 = Dorsale::Flyboy::Task.create!(
   :name        => "Rediger les documentations",
-  :description => "Dorsale, CustomerVault, Flyboy, ..."
+  :description => "Dorsale, CustomerVault, Flyboy, ...",
 )
 
 corporation2_task1 = Dorsale::Flyboy::Task.create!(
   :taskable    => corporation2,
-  :name        => "Relancer et se faire payer"
+  :name        => "Relancer et se faire payer",
 )
 
 corporation2_task1.comments.create!(

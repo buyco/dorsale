@@ -74,7 +74,7 @@ Given(/^existing "(.*?)" quotations with "(.*?)" amount$/) do |n, amount|
       quotation: quotation,
       quantity: 1,
       unit_price: amount,
-      total: nil
+      total: nil,
     )
   end
 end

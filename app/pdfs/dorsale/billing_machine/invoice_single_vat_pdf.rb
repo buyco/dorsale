@@ -73,7 +73,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
       "BryantPro" => {
         normal: "#{font_root}/BryantPro-Regular.ttf",
         bold:   "#{font_root}/BryantPro-Bold.ttf",
-      }
+      },
     )
 
     font("BryantPro")
