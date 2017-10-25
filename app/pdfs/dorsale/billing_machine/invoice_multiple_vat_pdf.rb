@@ -61,7 +61,7 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
           row(0).font_style = :bold
           row(0).border_width = 1
           cells.style do |c|
-            c.align = c.column == 0 ? :left : :right
+            c.align = c.column.zero? ? :left : :right
           end
         end
     end

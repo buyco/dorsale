@@ -291,7 +291,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
       do
         row(0).font_style = :bold
         row(0).border_width = 1
-        cells.style { |c| c.align = c.column == 0 ? :left : :right }
+        cells.style { |c| c.align = c.column.zero? ? :left : :right }
       end # table
     end # bounding_box
   end # build_table

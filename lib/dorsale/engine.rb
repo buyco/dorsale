@@ -54,13 +54,13 @@ module Dorsale
     end
 
     initializer "check_pundit_policies" do
-      if Rails.env.test? || Rails.env.development?
-        Dorsale::PolicyChecker.check!
-      end
+      Dorsale::PolicyChecker.check! if Rails.env.test? || Rails.env.development?
     end
 
     initializer "assets" do
-      Rails.application.config.assets.precompile += %w( dorsale/avatar.png )
+      Rails.application.config.assets.precompile += %w(
+        dorsale/avatar.png
+      )
     end
 
     initializer "simple_form" do
