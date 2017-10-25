@@ -32,8 +32,6 @@ class Dorsale::ApplicationPolicy
     send(:define_method, object_type) { subject }
   end
 
-  private
-
   class Scope
     attr_reader :user, :scope
 
