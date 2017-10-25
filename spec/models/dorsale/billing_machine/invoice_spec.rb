@@ -143,7 +143,7 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
         :unit_price => 5,
         :vat_rate   => 20,
         :invoice    => invoice,
-      ) #total 50
+      ) # total 50
 
       create(:billing_machine_invoice_line,
         :quantity   => 10,
@@ -168,7 +168,7 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
         :unit_price => 5,
         :vat_rate   => 20,
         :invoice    => invoice,
-      ) #total 50
+      ) # total 50
 
       create(:billing_machine_invoice_line,
         :quantity   => 10,

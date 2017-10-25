@@ -288,7 +288,7 @@ Then(/^the invoice line shows the right total excluding taxes value$/) do
 end
 
 Then(/^the invoice line shows the right total including taxes value$/) do
-  expect(page).to have_selector ".total_including_taxes" , text: "11,99 €" #@invoice.total_all_taxes pb d'arrondi
+  expect(page).to have_selector ".total_including_taxes" , text: "11,99 €" # @invoice.total_all_taxes pb d'arrondi
 end
 
 Then(/^the invoice line shows the right customer's name$/) do
