@@ -10,7 +10,7 @@ class Dorsale::BillingMachine::Quotation::ToInvoice < ::Dorsale::Service
 
     quotation.attributes.each do |k, v|
       next if k.to_s == "id"
-      next if k.to_s.match? /index|tracking|state/
+      next if k.to_s.match?(/index|tracking|state/)
       next if k.to_s.end_with?("_at")
 
       if invoice.respond_to?("#{k}=")
@@ -23,7 +23,7 @@ class Dorsale::BillingMachine::Quotation::ToInvoice < ::Dorsale::Service
 
       quotation_line.attributes.each do |k, v|
         next if k.to_s == "id"
-        next if k.to_s.match? /index|tracking|state/
+        next if k.to_s.match?(/index|tracking|state/)
         next if k.to_s.end_with?("_at")
 
         if invoice_line.respond_to?("#{k}=")
