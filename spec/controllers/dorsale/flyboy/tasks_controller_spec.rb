@@ -236,7 +236,7 @@ describe Dorsale::Flyboy::TasksController, type: :controller do
 
     it "is expected to create a task comment" do
       task = create(:flyboy_task, term: 3.days.ago)
-      expect{ patch :snooze, params: {:id => task.to_param} }.to change{ Dorsale::Flyboy::TaskComment.count }.by(1)
+      expect { patch :snooze, params: {:id => task.to_param} }.to change { Dorsale::Flyboy::TaskComment.count }.by(1)
     end
   end
 

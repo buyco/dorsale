@@ -119,7 +119,7 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
       invoice = create(:billing_machine_invoice)
       line1   = create(:billing_machine_invoice_line, invoice: invoice, vat_rate: 10)
 
-      expect{
+      expect {
         line2   = create(:billing_machine_invoice_line, invoice: invoice, vat_rate: 15)
       }.to raise_error(RuntimeError)
     end
@@ -127,7 +127,7 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
     it "it should raise when vat mode is multiple" do
       ::Dorsale::BillingMachine.vat_mode = :multiple
       invoice = build(:billing_machine_invoice)
-      expect{ invoice.vat_rate }.to raise_error(RuntimeError)
+      expect { invoice.vat_rate }.to raise_error(RuntimeError)
     end
   end
 

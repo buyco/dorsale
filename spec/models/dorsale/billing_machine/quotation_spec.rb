@@ -89,7 +89,7 @@ describe ::Dorsale::BillingMachine::Quotation do
       quotation = create(:billing_machine_quotation)
       line1   = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 10)
 
-      expect{
+      expect {
         line2   = create(:billing_machine_quotation_line, quotation: quotation, vat_rate: 15)
       }.to raise_error(RuntimeError)
     end
@@ -97,7 +97,7 @@ describe ::Dorsale::BillingMachine::Quotation do
     it "it should raise when vat mode is multiple" do
       ::Dorsale::BillingMachine.vat_mode = :multiple
       quotation = build(:billing_machine_quotation)
-      expect{ quotation.vat_rate }.to raise_error(RuntimeError)
+      expect { quotation.vat_rate }.to raise_error(RuntimeError)
     end
   end
 
