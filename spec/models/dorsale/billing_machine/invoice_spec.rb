@@ -19,8 +19,8 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
   it { is_expected.to respond_to :unique_index }
   it { is_expected.to respond_to :commercial_discount }
 
-  it {is_expected.to respond_to :total_excluding_taxes}
-  it {is_expected.to respond_to :total_including_taxes}
+  it { is_expected.to respond_to :total_excluding_taxes }
+  it { is_expected.to respond_to :total_including_taxes }
 
   it { is_expected.to respond_to :advance }
 
