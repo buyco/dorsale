@@ -55,16 +55,16 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
         ]
       end
 
-    table table_products,
-      :column_widths => [first_column_width, second_column_width, third_column_width, fourth_column_width, fifth_column_width, last_column_width],
-      :header => true,
-      :cell_style    => {border_width: 0} do
-        row(0).font_style = :bold
-        row(0).border_width = 1
-        cells.style do |c|
-          c.align = c.column == 0 ? :left : :right
+      table table_products,
+        :column_widths => [first_column_width, second_column_width, third_column_width, fourth_column_width, fifth_column_width, last_column_width],
+        :header => true,
+        :cell_style    => {border_width: 0} do
+          row(0).font_style = :bold
+          row(0).border_width = 1
+          cells.style do |c|
+            c.align = c.column == 0 ? :left : :right
+          end
         end
-      end
     end
   end
 
