@@ -205,7 +205,7 @@ describe Dorsale::Flyboy::TasksController, type: :controller do
 
         patch :update, params: {
           :id   => task.to_param,
-          :task => {:name => nil}
+          :task => {:name => nil},
         }
 
         expect(assigns(:task)).to eq(task)

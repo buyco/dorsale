@@ -38,7 +38,7 @@ Dorsale::BillingMachine::Invoice.create!(
       :label      => "Bombons en sucre",
       :quantity   => 3.2,
       :unit_price => 14,
-   }
+   },
   ]
 )
 
@@ -73,7 +73,7 @@ Dorsale::BillingMachine::Quotation.create!(
         :label      => "Gestion de projet",
         :quantity   => 5,
         :unit_price => 1200,
-    }
+    },
   ]
 )
 

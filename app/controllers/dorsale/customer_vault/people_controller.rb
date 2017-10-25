@@ -155,7 +155,7 @@ class Dorsale::CustomerVault::PeopleController < ::Dorsale::CustomerVault::Appli
         :street_bis,
         :zip,
         :city,
-        :country
+        :country,
       ],
     ]
   end

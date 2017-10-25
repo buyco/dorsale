@@ -98,7 +98,7 @@ class Dorsale::Alexandrie::AttachmentsController < ::Dorsale::ApplicationControl
   def common_permitted_params
     [
       :name,
-      :attachment_type_id
+      :attachment_type_id,
     ]
   end
 
