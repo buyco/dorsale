@@ -90,7 +90,6 @@ class Dorsale::Flyboy::TasksController < ::Dorsale::Flyboy::ApplicationControlle
 
   def edit
     authorize @task, :update?
-
   end
 
   def update

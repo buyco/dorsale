@@ -39,7 +39,6 @@ class Dorsale::BillingMachine::Invoice < ::Dorsale::ApplicationRecord
     assign_default :commercial_discount,   0.0
     assign_default :total_excluding_taxes, 0.0
     assign_default :paid,                  false
-
   end
 
   after_initialize :assign_default_dates
