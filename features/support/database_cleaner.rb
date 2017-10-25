@@ -1,4 +1,4 @@
-require 'database_cleaner'
+require "database_cleaner"
 
 Cucumber::Rails::Database.autorun_database_cleaner = false
 Cucumber::Rails::Database.javascript_strategy      = :truncation

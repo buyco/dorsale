@@ -22,13 +22,13 @@ Given(/^(\d+) associated documents to this quotation$/) do |arg1|
 end
 
 Given(/^a bunch of existing quotations$/) do
-  c1 = create(:customer_vault_corporation, name: 'Bidule')
-  c2 = create(:customer_vault_corporation, name: 'Machin')
-  c3 = create(:customer_vault_corporation, name: 'Chose')
+  c1 = create(:customer_vault_corporation, name: "Bidule")
+  c2 = create(:customer_vault_corporation, name: "Machin")
+  c3 = create(:customer_vault_corporation, name: "Chose")
 
-  i1 = create(:customer_vault_individual, first_name: 'Oh')
-  i2 = create(:customer_vault_individual, first_name: 'Ah')
-  i3 = create(:customer_vault_individual, first_name: 'Eh')
+  i1 = create(:customer_vault_individual, first_name: "Oh")
+  i2 = create(:customer_vault_individual, first_name: "Ah")
+  i3 = create(:customer_vault_individual, first_name: "Eh")
 
   create(:billing_machine_quotation,
     :id_card  => @id_card,
@@ -81,7 +81,7 @@ Given(/^existing "(.*?)" quotations with "(.*?)" amount$/) do |n, amount|
 end
 
 When(/^he changes the quotation VAT rate to "(.*?)"$/) do |arg1|
-  fill_in 'quotation_vat_rate', with: arg1
+  fill_in "quotation_vat_rate", with: arg1
 end
 
 When(/^the user goes to the quotations page$/) do
@@ -89,23 +89,23 @@ When(/^the user goes to the quotations page$/) do
 end
 
 When(/^the quotation line shows the right date$/) do
-  page.should have_selector '.date' , text: I18n.l(@quotation.date)
+  page.should have_selector ".date" , text: I18n.l(@quotation.date)
 end
 
 When(/^the quotation line shows the right traking\-id$/) do
-  page.should have_selector '.tracking_id' , text: @quotation.tracking_id
+  page.should have_selector ".tracking_id" , text: @quotation.tracking_id
 end
 
 When(/^the quotation line shows the right customer's name$/) do
-  page.should have_selector '.customer_name', text: @customer.name
+  page.should have_selector ".customer_name", text: @customer.name
 end
 
 When(/^the quotation line shows the right total excluding taxes value$/) do
-  page.should have_selector '.total_excluding_taxes' , text: "9,99 €"
+  page.should have_selector ".total_excluding_taxes" , text: "9,99 €"
 end
 
 When(/^the quotation line shows the right total including taxes value$/) do
-  page.should have_selector '.total_including_taxes' , text: "11,99 €"
+  page.should have_selector ".total_including_taxes" , text: "11,99 €"
 end
 
 When(/^the user goes to the quotation details$/) do
@@ -117,10 +117,10 @@ When(/^he creates a new quotation$/) do
 end
 
 When(/^he fills the reference and the date$/) do
-  fill_in 'quotation_label', with: @label = 'My reference'
-  fill_in 'quotation_date', with: @date = '01/01/2014'
+  fill_in "quotation_label", with: @label = "My reference"
+  fill_in "quotation_date", with: @date = "01/01/2014"
   select @payment_term.label
-  fill_in 'quotation_comments', with: "I-am-a-comment"
+  fill_in "quotation_comments", with: "I-am-a-comment"
 end
 
 When(/^he saves the quotation$/) do
@@ -133,7 +133,7 @@ end
 
 When(/^changes the quotation label$/) do
   @new_label=  @quotation.label + " Edited"
-  fill_in 'quotation_label', with: @new_label
+  fill_in "quotation_label", with: @new_label
 end
 
 When(/^he copy the quotation$/) do
@@ -153,20 +153,20 @@ end
 
 Then(/^the document is not in the quotation details$/) do
   visit dorsale.billing_machine_quotation_path(@quotation)
-  page.should have_link 'pdf.pdf', count: 1
+  page.should have_link "pdf.pdf", count: 1
 end
 
 Then(/^a message signals the success of the quotation update$/) do
-  page.should have_selector '.alert-success'
+  page.should have_selector ".alert-success"
 end
 
 Then(/^he fill the quotation commercial discount with "(.*?)"$/) do |arg1|
-  fill_in 'quotation_commercial_discount', with: arg1
+  fill_in "quotation_commercial_discount", with: arg1
 end
 
 Then(/^the quotation's label has changed$/) do
   visit dorsale.edit_billing_machine_quotation_path(@quotation)
-  page.should have_field('quotation_label', with: @new_label)
+  page.should have_field("quotation_label", with: @new_label)
 end
 
 Then(/^I am on the created quotation$/) do
@@ -175,29 +175,29 @@ Then(/^I am on the created quotation$/) do
 end
 
 Then(/^he can see all the quotation informations$/) do
-  expect(page).to have_selector '.quotation-label', @quotation.label
+  expect(page).to have_selector ".quotation-label", @quotation.label
 
   expect(page).to have_selector ".quotation-expires_at", "21/12/2012"
 end
 
 Then(/^the quotation default date is set to today's date\.$/) do
-  page.should have_field('quotation_date', with: I18n.l(Time.zone.now.to_date))
+  page.should have_field("quotation_date", with: I18n.l(Time.zone.now.to_date))
 end
 
 Then(/^he should see (\d+) quotations?$/) do |arg1|
-  page.should have_selector '.quotation', count: arg1
+  page.should have_selector ".quotation", count: arg1
 end
 
 Then(/^the quotation is displayed correctly$/) do
-  expect(page).to have_selector '.tracking_id', @quotation.tracking_id
+  expect(page).to have_selector ".tracking_id", @quotation.tracking_id
 end
 
 Then(/^a message signals the success of the quotation creation$/) do
-  page.should have_selector '.alert-success'
+  page.should have_selector ".alert-success"
 end
 
 Then(/^he will see links to the documents$/) do
-  page.should have_link 'pdf.pdf', count: 2
+  page.should have_link "pdf.pdf", count: 2
 end
 
 Then(/^the quotation informations are visible on the quotation details$/) do
@@ -208,7 +208,7 @@ Then(/^the quotation informations are visible on the quotation details$/) do
 end
 
 Then(/^only the quotations of this customer do appear$/) do
-  expect(page).to have_selector(".customer_name", text: 'Bidule', count: 2)
+  expect(page).to have_selector(".customer_name", text: "Bidule", count: 2)
 end
 
 Then(/^only the quotations of today do appear$/) do

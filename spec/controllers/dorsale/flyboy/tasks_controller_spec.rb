@@ -52,19 +52,19 @@ describe Dorsale::Flyboy::TasksController, type: :controller do
         @task2 = create(:flyboy_task, done: false)
       end
 
-      it 'should display both when not filtered' do
+      it "should display both when not filtered" do
         get :index
         expect(assigns(:tasks).to_a.sort).to eq [@task1, @task2].sort
       end
 
-      it 'should filter by status closed' do
-        cookies["filters"] = {'fb_state' => "done"}.to_json
+      it "should filter by status closed" do
+        cookies["filters"] = {"fb_state" => "done"}.to_json
         get :index
         expect(assigns(:tasks).to_a).to eq [@task1]
       end
 
-      it 'should filter by status opened' do
-        cookies["filters"] = {'fb_state' => "undone"}.to_json
+      it "should filter by status opened" do
+        cookies["filters"] = {"fb_state" => "undone"}.to_json
         get :index
         expect(assigns(:tasks).to_a).to eq [@task2]
       end

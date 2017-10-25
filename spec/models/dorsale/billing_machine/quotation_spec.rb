@@ -44,28 +44,28 @@ describe ::Dorsale::BillingMachine::Quotation do
     quotation.save
   end
 
-  describe 'unique_index' do
-    context 'when unique index is 69' do
-      it 'should be assigned upon creation' do
-        quotation1 = create(:billing_machine_quotation, date: '2014-02-01', unique_index: 69)
-        quotation2 = create(:billing_machine_quotation, date: '2014-02-01')
+  describe "unique_index" do
+    context "when unique index is 69" do
+      it "should be assigned upon creation" do
+        quotation1 = create(:billing_machine_quotation, date: "2014-02-01", unique_index: 69)
+        quotation2 = create(:billing_machine_quotation, date: "2014-02-01")
         expect(quotation2.unique_index).to eq(70)
       end
     end
 
-    context 'when unique index is nil' do
-      it 'should be assigned upon creation' do
+    context "when unique index is nil" do
+      it "should be assigned upon creation" do
         ::Dorsale::BillingMachine::Quotation.destroy_all
-        quotation1 = create(:billing_machine_quotation, date: '2014-02-01')
+        quotation1 = create(:billing_machine_quotation, date: "2014-02-01")
         expect(quotation1.unique_index).to eq(1)
       end
     end
   end
 
-  describe 'tracking_id' do
-    it 'should return correct tracking_id' do
-      quotation = create(:billing_machine_quotation, date: '2014-02-01')
-      expect(quotation.tracking_id).to eq('2014-01')
+  describe "tracking_id" do
+    it "should return correct tracking_id" do
+      quotation = create(:billing_machine_quotation, date: "2014-02-01")
+      expect(quotation.tracking_id).to eq("2014-01")
     end
   end
 

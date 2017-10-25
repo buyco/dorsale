@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Dorsale::Flyboy::Task::Snoozer do
   describe "#snooze" do

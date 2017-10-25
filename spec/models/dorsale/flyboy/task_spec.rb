@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Dorsale::Flyboy::Task do
   it { is_expected.to belong_to(:taskable) }
@@ -36,8 +36,8 @@ describe Dorsale::Flyboy::Task do
     end
   end
 
-  describe '#validation' do
-    it 'factory should be #valid?' do
+  describe "#validation" do
+    it "factory should be #valid?" do
       expect(create(:flyboy_task)).to be_valid
     end
   end # describe '#validation'

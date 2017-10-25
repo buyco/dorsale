@@ -14,17 +14,17 @@ RSpec.describe User, type: :model do
       expect(@user.is_active).to eq true
     end
 
-    it 'should create a valid password upon creation' do
+    it "should create a valid password upon creation" do
       user = create(:user, password: nil, password_confirmation: nil)
       expect(user).to be_persisted
     end
 
-    it 'should not override choosen password' do
+    it "should not override choosen password" do
       user = create(:user, password: "totototo", password_confirmation: nil)
       expect(user.password).to eq "totototo"
     end
 
-    it 'should send a welcome message upon creation' do
+    it "should send a welcome message upon creation" do
       expect {
         create(:user)
       }.to change(ActionMailer::Base.deliveries, :count).by(1)

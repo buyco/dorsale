@@ -29,7 +29,7 @@ corporation1 = Dorsale::CustomerVault::Corporation.create!(
 )
 
 Dorsale::BillingMachine::Invoice.create!(
-  :label        => 'Commande de bombons',
+  :label        => "Commande de bombons",
   :id_card      => id_card,
   :customer     => corporation1,
   :payment_term => payment_term,
@@ -59,7 +59,7 @@ corporation2.comments.create!(
 )
 
 Dorsale::BillingMachine::Quotation.create!(
-  :label            => 'Application sur mesure',
+  :label            => "Application sur mesure",
   :id_card          => id_card,
   :customer         => corporation2,
   :payment_term     => payment_term,

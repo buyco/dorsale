@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ::Dorsale::ExpenseGun::Expense, type: :model do
   it { is_expected.to have_many(:expense_lines).dependent(:destroy) }

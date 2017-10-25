@@ -14,7 +14,7 @@ World(CucumberWaitTurbolinksRequests)
 
 # Auto wait turbolinks requests between steps
 AfterStep do |scenario|
-  if page.evaluate_script('typeof Turbolinks') != "undefined"
+  if page.evaluate_script("typeof Turbolinks") != "undefined"
     evaluate_script %(
       $(document).on("turbolinks:before-visit", function(){
         $("html").addClass("turbolinks-load")

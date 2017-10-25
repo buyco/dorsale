@@ -32,10 +32,10 @@ RSpec.describe ::Dorsale::CustomerVault::PeopleController, type: :controller do
   describe "#list" do
     describe "sorting" do
       it "should sort people by name by default" do
-        abc   = create(:customer_vault_corporation, name: 'Abc Corp')
-        bob   = create(:customer_vault_individual, last_name: 'Bob')
-        alice = create(:customer_vault_individual, last_name: 'Alice')
-        zorg  = create(:customer_vault_corporation, name: 'Zorg Corp')
+        abc   = create(:customer_vault_corporation, name: "Abc Corp")
+        bob   = create(:customer_vault_individual, last_name: "Bob")
+        alice = create(:customer_vault_individual, last_name: "Alice")
+        zorg  = create(:customer_vault_corporation, name: "Zorg Corp")
 
         get :index
 

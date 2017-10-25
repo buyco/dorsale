@@ -32,7 +32,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
   attr_reader :main_document
 
   def initialize(main_document)
-    super(page_size: 'A4', margin: 1.cm)
+    super(page_size: "A4", margin: 1.cm)
     setup
     @main_document = main_document
     @id_card       = main_document.id_card
