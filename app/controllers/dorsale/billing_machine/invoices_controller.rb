@@ -103,15 +103,13 @@ class Dorsale::BillingMachine::InvoicesController < ::Dorsale::BillingMachine::A
   def email
     authorize @invoice, :email?
 
-    @subject =
-    begin
+    @subject = begin
       params[:email][:subject]
     rescue
       "#{model.t} #{@invoice.tracking_id} : #{@invoice.label}"
     end
 
-    @body =
-    begin
+    @body = begin
       params[:email][:body]
     rescue
       t("emails.invoices.send_invoice_to_customer",
