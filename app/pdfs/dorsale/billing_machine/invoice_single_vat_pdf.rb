@@ -202,7 +202,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
       draw_bounds_debug
       stroke do
         fill_color LIGHT_GREY
-        fill_rounded_rectangle [cursor-bounds.height,cursor], bounds.width, bounds.height, 0
+        fill_rounded_rectangle [cursor-bounds.height, cursor], bounds.width, bounds.height, 0
         fill_color BLACK
       end
 
@@ -238,7 +238,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
     bounding_box [left, top], width: width, height: height do
       repeat :all do
         float do
-          table [["","","","",""]],
+          table [["", "", "", "", ""]],
             :column_widths => [
               first_column_width,
               second_column_width,
@@ -272,7 +272,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
       main_document.lines.each do |line|
         table_products.push [
           line.label,
-          number(line.quantity).gsub(",00","").gsub(".00",""),
+          number(line.quantity).gsub(",00", "").gsub(".00", ""),
           line.unit,
           bm_currency(line.unit_price),
           bm_currency(line.total),
@@ -345,7 +345,7 @@ class Dorsale::BillingMachine::InvoiceSingleVatPdf < Prawn::Document
 
       table table_totals,
         :column_widths => [fourth_column_width, last_column_width],
-        :cell_style    => {border_width: [0, 1, 0 ,0]},
+        :cell_style    => {border_width: [0, 1, 0 , 0]},
         :position      => :right do
           row(-1).style :font_style       => :bold
           column(0).padding_right = 0.2.cm
