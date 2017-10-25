@@ -8,7 +8,7 @@ class Dorsale::CustomerVault::PersonData
   end
 
   def self.load(json_string)
-    new JSON.load(json_string)
+    new JSON.parse(json_string)
   end
 
   def self.methods_to_delegate
