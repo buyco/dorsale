@@ -50,7 +50,7 @@ class Dorsale::BillingMachine::InvoiceMultipleVatPdf < ::Dorsale::BillingMachine
           line.unit,
           percentage(line.vat_rate),
           bm_currency(line.unit_price),
-          bm_currency(line.total)
+          bm_currency(line.total),
         ]
       end
 
