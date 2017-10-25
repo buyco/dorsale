@@ -194,5 +194,4 @@ describe ::Dorsale::BillingMachine::Invoice, type: :model do
       expect(invoice.balance).to eq(0)
     end
   end
-
 end

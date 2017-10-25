@@ -129,5 +129,4 @@ RSpec.describe ::Dorsale::CustomerVault::PeopleController, type: :controller do
       expect(event.action).to eq "update"
     end
   end # describe "#update"
-
 end

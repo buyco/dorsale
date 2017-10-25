@@ -25,7 +25,6 @@ Then(/^the id_card is added to the id_card list$/) do
   expect(page).to have_content "Id Card name"
   expect(page).to have_content "Id Card entity name"
   expect(page).to have_content "Id Card contact full name"
-
 end
 
 Then(/^the current id_card's label should be pre\-filled$/) do

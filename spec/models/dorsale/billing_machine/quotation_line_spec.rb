@@ -48,5 +48,4 @@ describe ::Dorsale::BillingMachine::QuotationLine do
     quotation = create(:billing_machine_quotation_line, quantity: nil, unit_price: nil, total: 0)
     expect(quotation.total).to eq(0)
   end
-
 end

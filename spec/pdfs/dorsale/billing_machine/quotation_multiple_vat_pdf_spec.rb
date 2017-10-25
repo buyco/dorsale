@@ -43,5 +43,4 @@ describe ::Dorsale::BillingMachine::QuotationMultipleVatPdf, pdfs: true do
       expect { generate! }.to_not raise_error
     end
   end # describe "empty quotation"
-
 end

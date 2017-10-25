@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-
   it "should have a valid factores" do
     expect(create(:user)).to be_valid
   end
@@ -63,5 +62,4 @@ RSpec.describe User, type: :model do
       expect(@user.avatar_url).to be_present
     end
   end
-
 end

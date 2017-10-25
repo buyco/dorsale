@@ -21,6 +21,5 @@ FactoryGirl.define do
     bank_name "My Bank Name"
     bank_address "My Bank Addresse"
     custom_info_1 "Long string to trigger a line break and test the layout in the invoice PDF generators"
-
   end
 end

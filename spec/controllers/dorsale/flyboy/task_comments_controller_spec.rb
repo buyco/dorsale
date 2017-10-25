@@ -29,5 +29,4 @@ describe Dorsale::Flyboy::TaskCommentsController, type: :controller do
       expect(response).to redirect_to flyboy_task_path(task)
     end
   end
-
 end

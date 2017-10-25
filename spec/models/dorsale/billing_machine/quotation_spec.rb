@@ -165,5 +165,4 @@ describe ::Dorsale::BillingMachine::Quotation do
       expect(quotation.balance).to eq(0.0)
     end
   end
-
 end

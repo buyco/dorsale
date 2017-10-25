@@ -17,6 +17,5 @@ describe ::Dorsale::UserMailer do
       expect(email.body).to include user.email
       expect(email.body).to include user.password
     end
-
   end
 end

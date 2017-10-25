@@ -140,7 +140,6 @@ describe Dorsale::Flyboy::TasksController, type: :controller do
 
   describe "POST create" do
     describe "with valid params" do
-
       it "creates a new Task" do
         expect {
           post :create, params: {:task => valid_attributes}
@@ -296,7 +295,5 @@ describe Dorsale::Flyboy::TasksController, type: :controller do
       expect(assigns(:next_week_tasks)).to      eq [@next_week_task]
       expect(assigns(:next_next_week_tasks)).to eq [@next_next_week_task]
     end
-
   end # describe summary
-
 end

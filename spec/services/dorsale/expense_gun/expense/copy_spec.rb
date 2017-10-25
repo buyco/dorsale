@@ -82,6 +82,5 @@ RSpec.describe ::Dorsale::ExpenseGun::Expense::Copy do
     expect(expense.expense_lines.first.updated_at).to be_present
     expect(copy.expense_lines.first.updated_at).to be_nil
   end
-
 end
 

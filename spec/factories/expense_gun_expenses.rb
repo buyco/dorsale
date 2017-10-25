@@ -9,6 +9,5 @@ FactoryGirl.define do
         create(:expense_gun_expense_line, expense: expense)
       }
     }
-
   end
 end

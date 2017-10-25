@@ -21,5 +21,4 @@ RSpec.describe Dorsale::Flyboy::Task::Copy do
   it "is expected to set the progress to 0" do
     expect(copy.progress).to eq 0
   end
-
 end

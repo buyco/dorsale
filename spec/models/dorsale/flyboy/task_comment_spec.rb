@@ -50,6 +50,5 @@ describe Dorsale::Flyboy::TaskComment do
       expect(comment1.reload.progress).to eq 30
       expect(comment2.reload.progress).to eq 50
     end
-
   end
 end

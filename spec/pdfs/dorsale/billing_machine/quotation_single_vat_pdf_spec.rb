@@ -55,7 +55,6 @@ describe ::Dorsale::BillingMachine::QuotationSingleVatPdf, pdfs: true do
       expect(content).to include "page 2"
     end
   end # describe "attachments"
-
 end
 
 
