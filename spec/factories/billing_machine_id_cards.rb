@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :billing_machine_id_card, class: ::Dorsale::BillingMachine::IdCard do
     id_card_name "AGILiDEE"
     entity_name "AGILiDEE"

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :customer_vault_corporation, class: ::Dorsale::CustomerVault::Corporation do
     name       { "#{Faker::Company.name} #{Faker::Company.suffix}" }
     short_name { "SN"                                              }

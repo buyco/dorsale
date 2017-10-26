@@ -31,8 +31,8 @@ require "agilibox"
 
 if Rails.env.test? || Rails.env.development?
   require "pry"
-  require "factory_girl_rails"
-  require "factory_girl"
+  require "factor_bot_rails"
+  require "factor_bot"
 end
 
 require "acts-as-taggable-on"
@@ -41,9 +41,9 @@ module Dorsale
   class Engine < ::Rails::Engine
     isolate_namespace Dorsale
 
-    initializer "factory_girl" do
+    initializer "factor_bot" do
       if Rails.env.test? || Rails.env.development?
-        FactoryGirl.definition_file_paths.unshift Dorsale::Engine.root.join("spec/factories/").to_s
+        FactoryBot.definition_file_paths.unshift Dorsale::Engine.root.join("spec/factories/").to_s
       end
     end
 
