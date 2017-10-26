@@ -39,7 +39,7 @@ group :test do
   gem "cucumber-rails", require: false
   gem "capybara"
   gem "poltergeist"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "guard"
   gem "guard-cucumber"
   gem "guard-rspec"
