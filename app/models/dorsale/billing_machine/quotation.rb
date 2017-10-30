@@ -18,7 +18,7 @@ class Dorsale::BillingMachine::Quotation < ::Dorsale::ApplicationRecord
 
   accepts_nested_attributes_for :lines, allow_destroy: true
 
-  polymorphic_id_for :customer
+  #polymorphic_id_for :customer
 
   mount_uploader :pdf_file, ::Dorsale::PdfUploader
 

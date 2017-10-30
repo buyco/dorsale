@@ -9,8 +9,8 @@ class Dorsale::Flyboy::Task < ::Dorsale::ApplicationRecord
   belongs_to :owner, polymorphic: true
   has_many :comments, class_name: ::Dorsale::Flyboy::TaskComment, inverse_of: :task, dependent: :destroy
 
-  polymorphic_id_for :taskable
-  polymorphic_id_for :owner
+  #polymorphic_id_for :taskable
+  #polymorphic_id_for :owner
 
   scope :delayed,  -> { where(done: false).where("term < ?", Time.zone.now.to_date) }
   scope :today,    -> { where(done: false).where("term = ?", Time.zone.now.to_date) }
