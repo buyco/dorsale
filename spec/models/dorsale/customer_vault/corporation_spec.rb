@@ -5,7 +5,6 @@ RSpec.describe ::Dorsale::CustomerVault::Corporation, type: :model do
     it { is_expected.to have_many :comments }
     it { is_expected.to have_many :taggings }
     it { is_expected.to have_many :tags }
-    it { is_expected.to have_many(:tasks).dependent(:destroy) }
 
     it { is_expected.to respond_to :legal_form }
     it { is_expected.to respond_to :capital }

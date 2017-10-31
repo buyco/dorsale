@@ -1,7 +1,0 @@
-- content_for :page_body
-  = comments_for(@person)
-
-  - if @person.try(:context).present?
-    .panel.panel-default: .panel-body = text2html(@person.context)
-
-= render "dorsale/customer_vault/people/show_layout"

@@ -13,20 +13,6 @@ Dorsale::Engine.routes.draw do
     resources :attachments, only: [:index, :create, :edit, :update, :destroy]
   end
 
-  # Flyboy
-
-  namespace :flyboy do
-    resources :tasks do
-      get :summary, on: :collection
-      member do
-        patch :complete
-        patch :snooze
-      end
-    end
-
-    resources :task_comments, only: [:create]
-  end
-
   # Billing Machine
 
   namespace :billing_machine do
@@ -45,37 +31,6 @@ Dorsale::Engine.routes.draw do
       post :copy, on: :member
       get :create_invoice, on: :member
     end
-  end
-
-  # Customer Vault
-
-  get "customer_vault/corporations" => "customer_vault/people#corporations"
-  get "customer_vault/individuals"  => "customer_vault/people#individuals"
-
-  namespace :customer_vault do
-    namespace :people do
-      get :activity
-    end
-
-    resources :people do
-      resources :links
-
-      member do
-        get :tasks
-        get :invoices
-      end
-    end
-
-    resources :corporations, path: "people", except: [:new] do
-      resources :links, except: [:index]
-    end
-
-    resources :individuals,  path: "people", except: [:new] do
-      resources :links, except: [:index]
-    end
-
-    resources :corporations, only: [:new, :create], controller: :people
-    resources :individuals,  only: [:new, :create], controller: :people
   end
 
   # Expense Gun
