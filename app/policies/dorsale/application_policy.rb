@@ -23,7 +23,6 @@ class Dorsale::ApplicationPolicy
   end
 
   def self.define_subject_accessor!
-    # Dorsale::BillingMachine::InvoicePolicy -> :invoice
     object_type = self.to_s.demodulize.gsub("Policy", "").underscore.to_sym
 
     # Avoid user/subject conflict

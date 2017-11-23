@@ -25,7 +25,6 @@ require "prawn/table"
 require "combine_pdf"
 require "nilify_blanks"
 require "chartkick"
-require "axlsx"
 
 require "agilibox"
 

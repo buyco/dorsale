@@ -13,26 +13,6 @@ Dorsale::Engine.routes.draw do
     resources :attachments, only: [:index, :create, :edit, :update, :destroy]
   end
 
-  # Billing Machine
-
-  namespace :billing_machine do
-    resources :id_cards, except: [:destroy, :show]
-    resources :payment_terms, except: [:destroy, :show]
-
-    resources :invoices, except: [:destroy] do
-      member do
-        get :copy
-        patch :pay
-        match :email, via: [:get, :post]
-      end
-    end
-
-    resources :quotations do
-      post :copy, on: :member
-      get :create_invoice, on: :member
-    end
-  end
-
   # Expense Gun
 
   namespace :expense_gun do

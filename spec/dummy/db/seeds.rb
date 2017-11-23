@@ -12,9 +12,6 @@ DatabaseCleaner.clean_with(:truncation, {except: %w(
 
 user = User.create!(email: "demo@agilidee.com", password: "password")
 
-id_card = Dorsale::BillingMachine::IdCard.create!(id_card_name: "Bidule Corp", entity_name: "Bidule Corp")
-payment_term = Dorsale::BillingMachine::PaymentTerm.create!(label: "A réception")
-
 corporation1 = Dorsale::CustomerVault::Corporation.create!(
   :name               => "agilidée",
   :email              => "contact@agilidee.com",
@@ -26,20 +23,6 @@ corporation1 = Dorsale::CustomerVault::Corporation.create!(
     :city    => "Marseille",
     :country => "France",
   }
-)
-
-Dorsale::BillingMachine::Invoice.create!(
-  :label        => 'Commande de bombons',
-  :id_card      => id_card,
-  :customer     => corporation1,
-  :payment_term => payment_term,
-  :lines_attributes => [
-    {
-      :label      => "Bombons en sucre",
-      :quantity   => 3.2,
-      :unit_price => 14,
-   }
-  ]
 )
 
 corporation2 = Dorsale::CustomerVault::Corporation.create!(
@@ -56,25 +39,6 @@ corporation2 = Dorsale::CustomerVault::Corporation.create!(
 corporation2.comments.create!(
   :text => "Je viens d'avoir cette boite au téléphone, il faut leur faire un devis.",
   author: user
-)
-
-Dorsale::BillingMachine::Quotation.create!(
-  :label            => 'Application sur mesure',
-  :id_card          => id_card,
-  :customer         => corporation2,
-  :payment_term     => payment_term,
-  :lines_attributes => [
-    {
-        :label      => "Développement",
-        :quantity   => 14,
-        :unit_price => 750,
-    },
-    {
-        :label      => "Gestion de projet",
-        :quantity   => 5,
-        :unit_price => 1200,
-    }
-  ]
 )
 
 individual1 = Dorsale::CustomerVault::Individual.create!(
