@@ -24,8 +24,6 @@ class Dorsale::CustomerVault::Person < ::Dorsale::ApplicationRecord
   has_one :address, class_name: ::Dorsale::Address, as: :addressable, inverse_of: :addressable, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
 
-  after_destroy :destroy_links
-
   default_scope -> {
     order("LOWER(COALESCE(corporation_name, '') || COALESCE(last_name, '') || COALESCE(first_name, '')) ASC")
   }
@@ -45,23 +43,4 @@ class Dorsale::CustomerVault::Person < ::Dorsale::ApplicationRecord
   def tags_on(*args)
     super(*args).order(:name)
   end
-
-  def links
-    a = ::Dorsale::CustomerVault::Link
-      .where(alice_id: id)
-      .preload(:alice => :taggings, :bob => :taggings)
-      .each { |l| l.person = l.alice ; l.other_person = l.bob }
-
-    b = ::Dorsale::CustomerVault::Link
-      .where(bob_id: id)
-      .preload(:alice => :taggings, :bob => :taggings)
-      .each { |l| l.person = l.bob ; l.other_person = l.alice }
-
-    return a + b
-  end
-
-  def destroy_links
-    links.each(&:destroy!)
-  end
-
 end
