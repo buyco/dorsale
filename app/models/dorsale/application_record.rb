@@ -13,6 +13,3 @@ class Dorsale::ApplicationRecord < ActiveRecord::Base
     reorder(:created_at, :id).last
   end
 end
-
-ActsAsTaggableOn::Tagging.send(:include, Agilibox::ActiveRecordUUIDConcern)
-ActsAsTaggableOn::Tag.send(:include, Agilibox::ActiveRecordUUIDConcern)

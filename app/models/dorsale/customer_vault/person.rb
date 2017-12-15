@@ -18,8 +18,6 @@ class Dorsale::CustomerVault::Person < ::Dorsale::ApplicationRecord
     end
   end
 
-  acts_as_taggable
-
   has_many :comments, -> { order(created_at: :desc, id: :desc) }, class_name: ::Dorsale::Comment, as: :commentable, dependent: :destroy
   has_one :address, class_name: ::Dorsale::Address, as: :addressable, inverse_of: :addressable, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
