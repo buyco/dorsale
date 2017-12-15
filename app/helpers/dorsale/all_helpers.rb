@@ -6,7 +6,6 @@ module Dorsale::AllHelpers
 
   include ::Dorsale::CommentsHelper
   include ::Dorsale::Alexandrie::AttachmentsHelper
-  include ::Dorsale::ExpenseGun::ApplicationHelper
   include ::Dorsale::UsersHelper
 
   extend self

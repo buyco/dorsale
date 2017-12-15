@@ -96,6 +96,3 @@ corporation2_task1.comments.create!(
   :progress    => 50,
   :author      => user,
 )
-
-Dorsale::ExpenseGun::Category.create!(name: "Telecom", vat_deductible: true)
-Dorsale::ExpenseGun::Category.create!(name: "Transport", vat_deductible: false)

@@ -12,23 +12,4 @@ Dorsale::Engine.routes.draw do
   namespace :alexandrie do
     resources :attachments, only: [:index, :create, :edit, :update, :destroy]
   end
-
-  # Expense Gun
-
-  namespace :expense_gun do
-    resources :categories, except: [:destroy, :show]
-
-    resources :expenses, except: [:destroy] do
-      member do
-        get :copy
-        patch :submit
-        patch :accept
-        patch :refuse
-        patch :cancel
-      end
-    end
-
-    get "/" => redirect{ ExpenseGun::Engine.routes.url_helpers.expenses_path }
-  end
-
 end
