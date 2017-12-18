@@ -9,8 +9,6 @@ class Dorsale::PolicyChecker
     check_policy! "Dorsale::Alexandrie::AttachmentPolicy"
     check_policy! "Dorsale::Alexandrie::AttachmentTypePolicy"
     check_policy! "Dorsale::CommentPolicy"
-    check_policy! "Dorsale::ExpenseGun::CategoryPolicy"
-    check_policy! "Dorsale::ExpenseGun::ExpensePolicy"
     check_policy! "UserPolicy"
 
     errors.each do |error|
