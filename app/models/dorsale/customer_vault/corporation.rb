@@ -1,7 +1,4 @@
 class Dorsale::CustomerVault::Corporation < Dorsale::CustomerVault::Person
-  serialize      :data,  Dorsale::CustomerVault::CorporationData
-  def_delegators :data, *Dorsale::CustomerVault::CorporationData.methods_to_delegate
-
   validates :corporation_name, presence: true
 
   def name
