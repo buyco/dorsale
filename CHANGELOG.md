@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.8.0
+
+- Deleting CustumerVault[Indiviual/Organization] and Comments from Dorsale
+
+## 3.6.0 & 3.7.0
+
+- Not documented
+
 ## 3.5.0
 
 - Move helpers/i18n/... to agilibox gem
