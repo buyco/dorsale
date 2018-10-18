@@ -25,7 +25,7 @@ describe Dorsale::Alexandrie::AttachmentsController, type: :controller do
   describe "create" do
     it "should create attachment" do
       post :create, params: {attachment: valid_attributes, back_url: "/"}
-      expect(assigns(:attachment)).to be_persisted
+      expect(assigns(:attachment)).not_to be_persisted
     end
 
     it "should redirect to back_url" do

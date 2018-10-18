@@ -12,7 +12,7 @@ gem "rails", "5.0.0"
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'
-gem 'pg'
+gem 'pg', '~> 0.18'
 gem 'uglifier'
 gem "pry-rails"
 gem "awesome_print"
